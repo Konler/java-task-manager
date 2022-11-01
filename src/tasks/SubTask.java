@@ -7,7 +7,7 @@ public class SubTask extends Task {
         super(name, description, status);
     }
 
-    public int getEpicId() {
+    public Integer getEpicId() {
         return epicId;
     }
 

@@ -70,8 +70,6 @@ public class Manager {
             epics.get(subTask.getEpicId()).getSubTaskIds().add(subTask.getId());
             subTasks.put(subTask.getId(), subTask);
             resolveEpicNewStatus(epics.get(subTask.getEpicId()));
-            Epic epic = epics.get(subTask.getEpicId());
-            epic.getSubTaskIds().add(subTask.getId());
         } else {
             System.out.println("SubTask не может быть создана без Epic");
         }
@@ -155,6 +153,11 @@ public class Manager {
         Epic epic = epics.get(epicId);
         if (epic != null) {
             epic.getSubTaskIds().clear();
+            for(SubTask subTask:subTasks.values()){
+                if(subTask.getEpicId().equals(epic.getId())){
+                    subTasks.remove(subTask.getId());
+                }
+            }
             resolveEpicNewStatus(epic);
         } else {
             System.out.println("Epic с id:" + epicId + " не найден");
