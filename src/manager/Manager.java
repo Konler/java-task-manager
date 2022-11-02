@@ -152,12 +152,10 @@ public class Manager {
     private void deleteAllSubTaskByEpicId(Integer epicId) {
         Epic epic = epics.get(epicId);
         if (epic != null) {
-            epic.getSubTaskIds().clear();
-            for(SubTask subTask:subTasks.values()){
-                if(subTask.getEpicId().equals(epic.getId())){
-                    subTasks.remove(subTask.getId());
-                }
+            for(Integer subTaskId:epic.getSubTaskIds()){
+                subTasks.remove(subTaskId);
             }
+            epic.getSubTaskIds().clear();
             resolveEpicNewStatus(epic);
         } else {
             System.out.println("Epic с id:" + epicId + " не найден");
