@@ -1,3 +1,5 @@
+import manager.InMemoryTaskManager;
+import manager.Managers;
 import manager.TaskManager;
 import tasks.Epic;
 import tasks.Status;
@@ -5,50 +7,63 @@ import tasks.SubTask;
 import tasks.Task;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
 
     public static void main(String[] args) {
-        TaskManager tasksTaskManager = new TaskManager();
+        TaskManager taskManager = Managers.getDefault();
 
         Task task1 = new Task("Task1", "Описание task1", Status.NEW);
-        tasksTaskManager.createTask(task1);
+        taskManager.createTask(task1);
 
         Task task2 = new Task("Task2", "Описание task2", Status.IN_PROGRESS);
-        tasksTaskManager.createTask(task2);
+        taskManager.createTask(task2);
 
         Epic epic1 = new Epic("Epic 1", "Описание эпика 1", Status.NEW);
-        tasksTaskManager.createEpic(epic1);
+        taskManager.createEpic(epic1);
 
         SubTask subTask1Epic1 = new SubTask("subTask1Epic1", "Description subTask1Epic1", Status.NEW);
         subTask1Epic1.setEpicId(epic1.getId());
-        tasksTaskManager.createSubTask(subTask1Epic1);
+        taskManager.createSubTask(subTask1Epic1);
 
         SubTask subTask2Epic1 = new SubTask("subTask2Epic1", "Description subTask2Epic1", Status.IN_PROGRESS);
         subTask2Epic1.setEpicId(epic1.getId());
-        tasksTaskManager.createSubTask(subTask2Epic1);
+        taskManager.createSubTask(subTask2Epic1);
 
         Epic epic2 = new Epic("Epic 2", "Описание эпика 2", Status.NEW);
-        tasksTaskManager.createEpic(epic2);
+        taskManager.createEpic(epic2);
 
         SubTask subTask1Epic2 = new SubTask("subTask1Epic2", "Description subTask1Epic2", Status.DONE);
         subTask1Epic2.setEpicId(epic2.getId());
-        tasksTaskManager.createSubTask(subTask1Epic2);
+        taskManager.createSubTask(subTask1Epic2);
 
-        printTasks(tasksTaskManager.getAllTasks());
-        printEpics(tasksTaskManager.getAllEpics());
-        printSubTasks(tasksTaskManager.getAllSubTasks());
+        printTasks(taskManager.getAllTasks());
+        printEpics(taskManager.getAllEpics());
+        printSubTasks(taskManager.getAllSubTasks());
 
         subTask1Epic2.setStatus(Status.NEW);
-        tasksTaskManager.updateSubTask(subTask1Epic2);
-        printEpics(tasksTaskManager.getAllEpics());
+        taskManager.updateSubTask(subTask1Epic2);
+        printEpics(taskManager.getAllEpics());
 
-        tasksTaskManager.deleteTaskById(task1.getId());
-        printTasks(tasksTaskManager.getAllTasks());
-        tasksTaskManager.deleteEpicById(epic2.getId());
-        printEpics(tasksTaskManager.getAllEpics());
+        taskManager.deleteTaskById(task1.getId());
+        printTasks(taskManager.getAllTasks());
+        taskManager.deleteEpicById(epic2.getId());
+        printEpics(taskManager.getAllEpics());
+
+        taskManager.getSubTaskById(subTask2Epic1.getId());
+        taskManager.getTaskById(task2.getId());
+        taskManager.getEpicById(epic1.getId());
+
+        printHistory(taskManager.getHistory());
     }
 
+    private static void printHistory(List<Task> tasks) {
+        System.out.println("История просмотров:");
+        for (Task task : tasks) {
+            System.out.println(task.getId());
+        }
+    }
 
     private static void printTasks(ArrayList<Task> tasks) {
         for (Task task : tasks) {
@@ -71,3 +86,4 @@ public class Main {
         }
     }
 }
+

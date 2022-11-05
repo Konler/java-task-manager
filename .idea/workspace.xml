@@ -2,9 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ab20c46e-51b1-4474-9a08-57a42804b2cf" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/manager/HistoryManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/manager/InMemoryHistoryManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/manager/InMemoryTaskManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/manager/Managers.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/manager/Manager.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/manager/TaskManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/manager/TaskManager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -140,6 +144,7 @@
       <workItem from="1667414994454" duration="916000" />
       <workItem from="1667514664092" duration="150000" />
       <workItem from="1667514857327" duration="1134000" />
+      <workItem from="1667687393733" duration="636000" />
     </task>
     <servers />
   </component>
