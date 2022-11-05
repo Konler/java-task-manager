@@ -8,7 +8,7 @@ import tasks.Task;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Manager {
+public class TaskManager {
     private HashMap<Integer, Task> tasks = new HashMap<>();
     private HashMap<Integer, SubTask> subTasks = new HashMap<>();
     private HashMap<Integer, Epic> epics = new HashMap<>();
