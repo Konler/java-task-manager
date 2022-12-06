@@ -1,4 +1,3 @@
-import manager.InMemoryTaskManager;
 import manager.Managers;
 import manager.TaskManager;
 import tasks.Epic;
@@ -31,37 +30,62 @@ public class Main {
         subTask2Epic1.setEpicId(epic1.getId());
         taskManager.createSubTask(subTask2Epic1);
 
+        SubTask subTask3Epic1 = new SubTask("subTask3Epic1", "Description subTask3Epic1", Status.DONE);
+        subTask3Epic1.setEpicId(epic1.getId());
+        taskManager.createSubTask(subTask3Epic1);
+
+
         Epic epic2 = new Epic("Epic 2", "Описание эпика 2", Status.NEW);
         taskManager.createEpic(epic2);
 
-        SubTask subTask1Epic2 = new SubTask("subTask1Epic2", "Description subTask1Epic2", Status.DONE);
-        subTask1Epic2.setEpicId(epic2.getId());
-        taskManager.createSubTask(subTask1Epic2);
 
         printTasks(taskManager.getAllTasks());
         printEpics(taskManager.getAllEpics());
         printSubTasks(taskManager.getAllSubTasks());
 
-        subTask1Epic2.setStatus(Status.NEW);
-        taskManager.updateSubTask(subTask1Epic2);
+        subTask3Epic1.setStatus(Status.NEW);
+        taskManager.updateSubTask(subTask3Epic1);
         printEpics(taskManager.getAllEpics());
+
+        taskManager.getTaskById(task2.getId());
+        taskManager.getEpicById(epic1.getId());
+        taskManager.getSubTaskById(subTask2Epic1.getId());
+        taskManager.getTaskById(task2.getId());
+        taskManager.getEpicById(epic1.getId());
+
+
+        System.out.println("История до удалений");
+        printHistory(taskManager.getHistory());
 
         taskManager.deleteTaskById(task1.getId());
         printTasks(taskManager.getAllTasks());
         taskManager.deleteEpicById(epic2.getId());
         printEpics(taskManager.getAllEpics());
 
-        taskManager.getSubTaskById(subTask2Epic1.getId());
-        taskManager.getTaskById(task2.getId());
-        taskManager.getEpicById(epic1.getId());
 
+        taskManager.deleteTaskById(task2.getId());
+        printHistory(taskManager.getHistory());
+        taskManager.deleteEpicById(epic1.getId());
+
+        taskManager.deleteAllTasks();
+        System.out.println("Удалили таски.");
+        printHistory(taskManager.getHistory());
+        taskManager.deleteAllSubTasks();
+        System.out.println("Удалили сабтаски.");
+        printHistory(taskManager.getHistory());
+        taskManager.deleteAllEpics();
+        System.out.println("Удалили эпики.");
         printHistory(taskManager.getHistory());
     }
 
     private static void printHistory(List<Task> tasks) {
         System.out.println("История просмотров:");
-        for (Task task : tasks) {
-            System.out.println(task.getId());
+        if (tasks.isEmpty()) {
+            System.out.println("История просмотров пуста");
+        } else {
+            for (Task task : tasks) {
+                System.out.println(task.getId());
+            }
         }
     }
 
@@ -85,5 +109,7 @@ public class Main {
                     + "; Описание эпика: " + epic.getDescription() + "; Статус эпика: " + epic.getStatus());
         }
     }
+
+
 }
 

@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ab20c46e-51b1-4474-9a08-57a42804b2cf" name="Default Changelist" comment="">
+    <list default="true" id="ab20c46e-51b1-4474-9a08-57a42804b2cf" name="Default Changelist" comment="В надежде сдать">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/manager/HistoryManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/manager/HistoryManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/manager/InMemoryHistoryManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/manager/InMemoryHistoryManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/manager/InMemoryTaskManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/manager/InMemoryTaskManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tasks/Epic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tasks/Epic.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,8 +17,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Enum" />
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -29,6 +30,14 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -143,6 +152,19 @@
       <workItem from="1667514857327" duration="1134000" />
       <workItem from="1667687393733" duration="1446000" />
       <workItem from="1668160739550" duration="1525000" />
+      <workItem from="1669714402083" duration="4210000" />
+      <workItem from="1669762031300" duration="2177000" />
+      <workItem from="1669851473306" duration="606000" />
+      <workItem from="1669891503972" duration="2165000" />
+      <workItem from="1669923529227" duration="9756000" />
+      <workItem from="1669935743264" duration="682000" />
+      <workItem from="1670008108468" duration="3798000" />
+      <workItem from="1670014857679" duration="9207000" />
+      <workItem from="1670113150610" duration="3312000" />
+      <workItem from="1670194275788" duration="3118000" />
+      <workItem from="1670234799809" duration="10801000" />
+      <workItem from="1670278974255" duration="8797000" />
+      <workItem from="1670318229883" duration="6110000" />
     </task>
     <servers />
   </component>
@@ -226,6 +248,27 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Main.java</url>
+          <line>59</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="manager.InMemoryTaskManager" memberName="subTasks" />
+      </pinned-members>
+    </pin-to-top-manager>
+    <watches-manager>
+      <configuration name="Application">
+        <watch expression="customLinkedList.head.prev" />
+      </configuration>
+    </watches-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/java_kanban$Main.ic" NAME="Main Coverage Results" MODIFIED="1667132975527" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
