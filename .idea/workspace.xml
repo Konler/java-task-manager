@@ -2,11 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ab20c46e-51b1-4474-9a08-57a42804b2cf" name="Default Changelist" comment="В надежде сдать">
+      <change afterPath="$PROJECT_DIR$/src/manager/Node.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/manager/HistoryManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/manager/HistoryManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/manager/InMemoryHistoryManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/manager/InMemoryHistoryManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/manager/InMemoryTaskManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/manager/InMemoryTaskManager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -164,7 +162,9 @@
       <workItem from="1670194275788" duration="3118000" />
       <workItem from="1670234799809" duration="10801000" />
       <workItem from="1670278974255" duration="8797000" />
-      <workItem from="1670318229883" duration="6110000" />
+      <workItem from="1670318229883" duration="6812000" />
+      <workItem from="1670443043312" duration="3314000" />
+      <workItem from="1670708399803" duration="481000" />
     </task>
     <servers />
   </component>

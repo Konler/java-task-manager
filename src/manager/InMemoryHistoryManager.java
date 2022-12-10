@@ -11,16 +11,6 @@ public class InMemoryHistoryManager implements HistoryManager {
     private Node<Task> tail;
     private int size;
 
-    static class Node<E> {
-        public E data;
-        public Node<E> next;
-        public Node<E> prev;
-
-        public Node(Node<E> prev, E data, Node<E> next) {
-            this.data = data;
-        }
-    }
-
     @Override
     public void add(Task task) {
         if (historyHash.containsKey(task.getId())) {
@@ -49,7 +39,7 @@ public class InMemoryHistoryManager implements HistoryManager {
 
     private void linkLast(Task task) {
         final Node<Task> oldTail = tail;
-        tail = new InMemoryHistoryManager.Node<>(oldTail, task, null);
+        tail = new Node<>(oldTail, task, null);
         if (oldTail == null) {
             head = tail;
         } else {
