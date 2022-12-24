@@ -38,13 +38,13 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     @Override
-    public SubTask getSubTaskById(Integer subTaskId) {
+    public SubTask getSubTaskById(Integer subTaskId) throws IOException, ManagerSaveException {
         historyManager.add(subTasks.get(subTaskId));
         return subTasks.get(subTaskId);
     }
 
     @Override
-    public Epic getEpicById(Integer epicId) {
+    public Epic getEpicById(Integer epicId) throws IOException, ManagerSaveException {
         historyManager.add(epics.get(epicId));
         return epics.get(epicId);
     }
@@ -170,7 +170,7 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     @Override
-    public void deleteSubTaskById(Integer subTaskId) {
+    public void deleteSubTaskById(Integer subTaskId) throws IOException, ManagerSaveException {
         SubTask subtask = getSubTaskById(subTaskId);
         if (subtask != null) {
             Epic epic = getEpicById(subtask.getEpicId());

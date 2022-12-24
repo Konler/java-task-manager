@@ -26,9 +26,9 @@ public interface TaskManager {
 
     Task getTaskById(Integer taskId) throws IOException, ManagerSaveException;
 
-    SubTask getSubTaskById(Integer subTaskId);
+    SubTask getSubTaskById(Integer subTaskId) throws IOException, ManagerSaveException;
 
-    Epic getEpicById(Integer epicId);
+    Epic getEpicById(Integer epicId) throws IOException, ManagerSaveException;
 
     void createTask(Task task) throws IOException, ManagerSaveException;
 
@@ -46,7 +46,7 @@ public interface TaskManager {
 
     void deleteEpicById(Integer idEpic);
 
-    void deleteSubTaskById(Integer subTaskId);
+    void deleteSubTaskById(Integer subTaskId) throws IOException, ManagerSaveException;
 
     ArrayList<SubTask> getEpicSubTasksByEpicId(Integer epicId);
 
