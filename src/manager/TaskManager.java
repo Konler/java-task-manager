@@ -4,6 +4,7 @@ import tasks.Epic;
 import tasks.SubTask;
 import tasks.Task;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,17 +24,17 @@ public interface TaskManager {
 
     void deleteAllEpics();
 
-    Task getTaskById(Integer taskId);
+    Task getTaskById(Integer taskId) throws IOException, ManagerSaveException;
 
     SubTask getSubTaskById(Integer subTaskId);
 
     Epic getEpicById(Integer epicId);
 
-    void createTask(Task task);
+    void createTask(Task task) throws IOException, ManagerSaveException;
 
-    void createEpic(Epic epic);
+    void createEpic(Epic epic) throws IOException, ManagerSaveException;
 
-    void createSubTask(SubTask subTask);
+    void createSubTask(SubTask subTask) throws IOException, ManagerSaveException;
 
     void updateTask(Task task);
 

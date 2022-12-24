@@ -1,3 +1,4 @@
+import manager.ManagerSaveException;
 import manager.Managers;
 import manager.TaskManager;
 import tasks.Epic;
@@ -5,12 +6,13 @@ import tasks.Status;
 import tasks.SubTask;
 import tasks.Task;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, ManagerSaveException {
         TaskManager taskManager = Managers.getDefault();
 
         Task task1 = new Task("Task1", "Описание task1", Status.NEW);
@@ -22,15 +24,15 @@ public class Main {
         Epic epic1 = new Epic("Epic 1", "Описание эпика 1", Status.NEW);
         taskManager.createEpic(epic1);
 
-        SubTask subTask1Epic1 = new SubTask("subTask1Epic1", "Description subTask1Epic1", Status.NEW);
+        SubTask subTask1Epic1 = new SubTask("subTask1Epic1", "Description subTask1Epic1",1, Status.NEW);
         subTask1Epic1.setEpicId(epic1.getId());
         taskManager.createSubTask(subTask1Epic1);
 
-        SubTask subTask2Epic1 = new SubTask("subTask2Epic1", "Description subTask2Epic1", Status.IN_PROGRESS);
+        SubTask subTask2Epic1 = new SubTask("subTask2Epic1", "Description subTask2Epic1",1, Status.IN_PROGRESS);
         subTask2Epic1.setEpicId(epic1.getId());
         taskManager.createSubTask(subTask2Epic1);
 
-        SubTask subTask3Epic1 = new SubTask("subTask3Epic1", "Description subTask3Epic1", Status.DONE);
+        SubTask subTask3Epic1 = new SubTask("subTask3Epic1", "Description subTask3Epic1",1, Status.DONE);
         subTask3Epic1.setEpicId(epic1.getId());
         taskManager.createSubTask(subTask3Epic1);
 

@@ -5,14 +5,15 @@ import tasks.Status;
 import tasks.SubTask;
 import tasks.Task;
 
+import java.io.IOException;
 import java.util.*;
 
 public class InMemoryTaskManager implements TaskManager {
-    private final HashMap<Integer, Task> tasks;
-    private final HashMap<Integer, SubTask> subTasks;
-    private final HashMap<Integer, Epic> epics;
+    final HashMap<Integer, Task> tasks;
+     final HashMap<Integer, SubTask> subTasks;
+  final HashMap<Integer, Epic> epics;
     private int idGenerator;
-    private HistoryManager historyManager;
+     HistoryManager historyManager;
 
     public InMemoryTaskManager() {
         tasks = new HashMap<>();
@@ -21,13 +22,17 @@ public class InMemoryTaskManager implements TaskManager {
         historyManager = Managers.getDefaultHistory();
     }
 
+    public HistoryManager getHistoryManager() {
+        return historyManager;
+    }
+
     @Override
     public List<Task> getHistory() {
         return historyManager.getHistory();
     }
 
     @Override
-    public Task getTaskById(Integer taskId) {
+    public Task getTaskById(Integer taskId) throws IOException, ManagerSaveException {
         historyManager.add(tasks.get(taskId));
         return tasks.get(taskId);
     }
@@ -98,19 +103,20 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     @Override
-    public void createTask(Task task) {
+    public void createTask(Task task) throws IOException, ManagerSaveException {
         task.setId(getNextId());
         tasks.put(task.getId(), task);
+
     }
 
     @Override
-    public void createEpic(Epic epic) {
+    public void createEpic(Epic epic) throws IOException, ManagerSaveException {
         epic.setId(getNextId());
         epics.put(epic.getId(), epic);
     }
 
     @Override
-    public void createSubTask(SubTask subTask) {
+    public void createSubTask(SubTask subTask) throws IOException, ManagerSaveException {
         if (epics.containsKey(subTask.getEpicId())) {
             subTask.setId(getNextId());
             epics.get(subTask.getEpicId()).getSubTaskIds().add(subTask.getId());
