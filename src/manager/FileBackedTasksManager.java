@@ -40,13 +40,17 @@ public class FileBackedTasksManager extends InMemoryTaskManager implements TaskM
 
         Task task2 = new Task("Task2", "Description", Status.IN_PROGRESS);
         fileBackedTasksManager.createTask(task2);
-        Epic epic1 = new Epic("Epic1", "Description", Status.DONE);
+        Epic epic1 = new Epic("Epic1", "Description", Status.NEW);
         fileBackedTasksManager.createEpic(epic1);
+
+        SubTask subTask1 =new SubTask("SubTask1","Description", 2,Status.NEW);
+        fileBackedTasksManager.createSubTask(subTask1);
 
         fileBackedTasksManager.getTaskById(task1.getId());
         fileBackedTasksManager.getTaskById(task2.getId());
         fileBackedTasksManager.getTaskById(task1.getId());
         fileBackedTasksManager.getEpicById(epic1.getId());
+        fileBackedTasksManager.getSubTaskById(subTask1.getId());
 
         FileBackedTasksManager fileBackedTasksManager1 = FileBackedTasksManager.loadFromFile(file);
     }
@@ -187,7 +191,7 @@ public class FileBackedTasksManager extends InMemoryTaskManager implements TaskM
 
     @Override
     public ArrayList<SubTask> getEpicSubTasksByEpicId(Integer epicId) {
-        return null;
+        return super.getEpicSubTasksByEpicId(epicId);
     }
 
 
@@ -221,7 +225,7 @@ public class FileBackedTasksManager extends InMemoryTaskManager implements TaskM
         Status status = Status.valueOf(elem[3].trim());
         int epicNumber = 0;
         if (elem.length == 6) {
-            epicNumber = Integer.parseInt(elem[5]);
+            epicNumber = Integer.parseInt(elem[5].trim());
         }
         if (elem[1].trim().equals("EPIC")) {
             Epic epic = new Epic(name, description, status);
