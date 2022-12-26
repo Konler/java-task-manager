@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="ab20c46e-51b1-4474-9a08-57a42804b2cf" name="Default Changelist" comment="В надежде сдать">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/V" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/manager/FileBackedTasksManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/manager/FileBackedTasksManager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -194,7 +193,7 @@
       <workItem from="1671915210533" duration="5277000" />
       <workItem from="1671976405235" duration="17000" />
       <workItem from="1671986644699" duration="1492000" />
-      <workItem from="1672056499550" duration="306000" />
+      <workItem from="1672056499550" duration="4779000" />
     </task>
     <servers />
   </component>
@@ -284,13 +283,13 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Main.java</url>
-          <line>51</line>
+          <line>46</line>
           <option name="timeStamp" value="7" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/manager/FileBackedTasksManager.java</url>
-          <line>54</line>
-          <option name="timeStamp" value="19" />
+          <line>42</line>
+          <option name="timeStamp" value="24" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
