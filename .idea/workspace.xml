@@ -1,9 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ab20c46e-51b1-4474-9a08-57a42804b2cf" name="Default Changelist" comment="В надежде сдать">
+    <list default="true" id="ab20c46e-51b1-4474-9a08-57a42804b2cf" name="Default Changelist" comment="С тестами">
+      <change afterPath="$PROJECT_DIR$/Test/manager/FileBackedTasksManagerTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Test/manager/InMemoryHistoryManagerTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Test/manager/InMemoryTaskManagerTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Test/manager/TaskManagerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/java-kanban.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/java-kanban.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file.CSV" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/manager/FileBackedTasksManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/manager/FileBackedTasksManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/manager/InMemoryHistoryManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/manager/InMemoryHistoryManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/manager/InMemoryTaskManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/manager/InMemoryTaskManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/manager/Node.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/manager/Node.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/manager/TaskManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/manager/TaskManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/task/Epic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/task/Epic.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/task/SubTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/task/SubTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/task/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/task/Task.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,6 +29,7 @@
         <option value="Interface" />
         <option value="Enum" />
         <option value="Class" />
+        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
@@ -104,11 +118,18 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="Downloaded.Files.Path.Enabled" value="true" />
+    <property name="Repository.Attach.Annotations" value="false" />
+    <property name="Repository.Attach.JavaDocs" value="false" />
+    <property name="Repository.Attach.Sources" value="false" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1667251779288" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
+    <property name="create.test.in.the.same.root" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -117,31 +138,110 @@
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
   </component>
-  <component name="RunManager" selected="Application.FileBackedTasksManager">
-    <configuration name="FileBackedTasksManager" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="manager.FileBackedTasksManager" />
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Сергей\Финальные проекты\java-kanban\lib\Test" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Сергей\Финальные проекты\java-kanban" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="managerTask" />
+      <recent name="manager" />
+      <recent name="task" />
+    </key>
+  </component>
+  <component name="RunManager" selected="JUnit.FileBackedTasksManagerTest">
+    <configuration name="FileBackedTasksManagerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="java-kanban" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="task.*" />
+          <option name="PATTERN" value="manager.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <option name="PACKAGE_NAME" value="manager" />
+      <option name="MAIN_CLASS_NAME" value="manager.FileBackedTasksManagerTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Main" />
+    <configuration name="FileBackedTasksManagerTest.shouldCorrectlySaveAndLoad" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="java-kanban" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="manager.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="manager" />
+      <option name="MAIN_CLASS_NAME" value="manager.FileBackedTasksManagerTest" />
+      <option name="METHOD_NAME" value="shouldCorrectlySaveAndLoad" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="InMemoryHistoryManagerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="java-kanban" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="manager.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="manager" />
+      <option name="MAIN_CLASS_NAME" value="manager.InMemoryHistoryManagerTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="InMemoryHistoryManagerTest.shouldRemoveTask" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="java-kanban" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="manager.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="manager" />
+      <option name="MAIN_CLASS_NAME" value="manager.InMemoryHistoryManagerTest" />
+      <option name="METHOD_NAME" value="shouldRemoveTask" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="InMemoryTaskManagerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="java-kanban" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="manager.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="manager" />
+      <option name="MAIN_CLASS_NAME" value="manager.InMemoryTaskManagerTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.FileBackedTasksManager" />
-        <item itemvalue="Application.Main" />
+        <item itemvalue="JUnit.FileBackedTasksManagerTest" />
+        <item itemvalue="JUnit.FileBackedTasksManagerTest.shouldCorrectlySaveAndLoad" />
+        <item itemvalue="JUnit.InMemoryHistoryManagerTest" />
+        <item itemvalue="JUnit.InMemoryHistoryManagerTest.shouldRemoveTask" />
+        <item itemvalue="JUnit.InMemoryTaskManagerTest" />
       </list>
     </recent_temporary>
   </component>
@@ -194,6 +294,24 @@
       <workItem from="1671976405235" duration="17000" />
       <workItem from="1671986644699" duration="1492000" />
       <workItem from="1672056499550" duration="4779000" />
+      <workItem from="1672098600910" duration="2492000" />
+      <workItem from="1672270736756" duration="995000" />
+      <workItem from="1672310755123" duration="92000" />
+      <workItem from="1672346885283" duration="1197000" />
+      <workItem from="1672689600215" duration="10020000" />
+      <workItem from="1673134272649" duration="1005000" />
+      <workItem from="1673135783914" duration="5478000" />
+      <workItem from="1673201849204" duration="9108000" />
+      <workItem from="1673302790539" duration="8634000" />
+      <workItem from="1673346485334" duration="4609000" />
+      <workItem from="1673386525780" duration="5817000" />
+      <workItem from="1673448363527" duration="5975000" />
+      <workItem from="1673468188400" duration="1158000" />
+      <workItem from="1673472971056" duration="3974000" />
+      <workItem from="1673477247912" duration="5394000" />
+      <workItem from="1673520478211" duration="4686000" />
+      <workItem from="1673541280904" duration="1303000" />
+      <workItem from="1673548551241" duration="4767000" />
     </task>
     <servers />
   </component>
@@ -278,6 +396,10 @@
       </map>
     </option>
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="С тестами" />
+    <option name="LAST_COMMIT_MESSAGE" value="С тестами" />
+  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
@@ -287,15 +409,32 @@
           <option name="timeStamp" value="7" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/manager/InMemoryTaskManager.java</url>
+          <line>102</line>
+          <option name="timeStamp" value="50" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/manager/FileBackedTasksManager.java</url>
-          <line>42</line>
-          <option name="timeStamp" value="24" />
+          <line>51</line>
+          <option name="timeStamp" value="54" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Test/manager/TaskManagerTest.java</url>
+          <line>237</line>
+          <option name="timeStamp" value="60" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Test/manager/FileBackedTasksManagerTest.java</url>
+          <line>45</line>
+          <option name="timeStamp" value="66" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <pin-to-top-manager>
       <pinned-members>
         <PinnedItemInfo parentTag="manager.InMemoryTaskManager" memberName="subTasks" />
+        <PinnedItemInfo parentTag="java.lang.Integer" memberName="value" />
+        <PinnedItemInfo parentTag="manager.InMemoryHistoryManager" memberName="tail" />
       </pinned-members>
     </pin-to-top-manager>
     <watches-manager>

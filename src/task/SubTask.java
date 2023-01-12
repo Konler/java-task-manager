@@ -1,11 +1,14 @@
 package task;
 
+import java.time.Duration;
+import java.time.Instant;
+
 public class SubTask extends Task {
     private Integer epicId;
 
-    public SubTask(String name, String description, Integer epicId,Status status) {
-        super(name, description, status);
-        this.epicId=epicId;
+    public SubTask(String name, String description, Status status, Instant startTime, Duration duration, Integer epicId) {
+        super(name, description, status, startTime, duration);
+        this.epicId = epicId;
     }
 
     public Integer getEpicId() {
@@ -15,4 +18,5 @@ public class SubTask extends Task {
     public void setEpicId(int epicId) {
         this.epicId = epicId;
     }
+
 }

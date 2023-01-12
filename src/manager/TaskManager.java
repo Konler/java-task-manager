@@ -6,9 +6,11 @@ import task.Task;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public interface TaskManager {
+
 
     List<Task> getHistory();
 
@@ -40,7 +42,7 @@ public interface TaskManager {
 
     void updateSubTask(SubTask subtask);
 
-    void updateEpic(Epic epic);
+    void updateEpic(Epic epic) throws IOException, ManagerSaveException;
 
     void deleteTaskById(Integer id);
 
@@ -49,6 +51,16 @@ public interface TaskManager {
     void deleteSubTaskById(Integer subTaskId) throws IOException, ManagerSaveException;
 
     ArrayList<SubTask> getEpicSubTasksByEpicId(Integer epicId);
+
+    void resolveEpicNewStatus(Epic epic);
+
+     HashMap<Integer, Task> getTasks();
+
+
+     HashMap<Integer, SubTask> getSubTasks();
+
+     HashMap<Integer, Epic> getEpics() ;
+
 
 }
 

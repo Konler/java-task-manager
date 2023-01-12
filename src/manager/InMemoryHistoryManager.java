@@ -50,36 +50,37 @@ public class InMemoryHistoryManager implements HistoryManager {
         InMemoryHistoryManager.historyHash.put(task.getId(), tail);
     }
 
-    public int size() {
-        return this.size;
+
+    List<Task> getTasks() {
+        List<Task> taskHistory = new ArrayList<>();
+        Node newNode = head;
+        while (newNode != null) {
+            taskHistory.add((Task) newNode.getTask());
+            newNode = newNode.getNext();
+        }
+        return taskHistory;
     }
 
-    private List<Task> getTasks() {
-        List<Task> tasks = new ArrayList<>();
-        Node<Task> node = head;
-        while (node != null) {
-            tasks.add(node.data);
-            node = node.next;
-        }
-        return tasks;
-    }
+    private void removeNode(Node node) {
+        if (node != null) {
+            historyHash.remove(node.getTask().getId());
+            Node prev = node.getPrev();
+            Node next = node.getNext();
 
-    private void removeNode(Node<Task> node) {
-        Node<Task> prevNode = node.prev;
-        Node<Task> nextNode = node.next;
-        if (prevNode == null) {
-            head = nextNode;
+            if (head == node) {
+                head = node.getNext();
+            }
+            if (tail == node) {
+                tail = node.getPrev();
+            }
 
-        } else {
-            prevNode.next = node.next;
+            if (prev != null) {
+                prev.setNext(next);
+            }
+
+            if (next != null) {
+                next.setPrev(prev);
+            }
         }
-        if (nextNode == null) {
-            tail = prevNode;
-        } else {
-            nextNode.prev = node.prev;
-        }
-        node.data = null;
-        node.next = null;
-        node.prev = null;
     }
 }
