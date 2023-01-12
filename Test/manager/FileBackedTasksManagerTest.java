@@ -57,7 +57,7 @@ class FileBackedTasksManagerTest extends TaskManagerTest<FileBackedTasksManager>
     public void shouldSaveAndLoadEmptyTasksEpicsSubtasks() throws IOException, ManagerSaveException {
         FileBackedTasksManager fileManager = new FileBackedTasksManager( file);
         fileManager.save();
-        fileManager.loadFromFile(file);
+        fileManager.loadFromFile();
         assertEquals(Collections.EMPTY_LIST, manager.getAllTasks());
         assertEquals(Collections.EMPTY_LIST, manager.getAllEpics());
         assertEquals(Collections.EMPTY_LIST, manager.getAllSubTasks());
@@ -67,7 +67,7 @@ class FileBackedTasksManagerTest extends TaskManagerTest<FileBackedTasksManager>
     public void shouldSaveAndLoadEmptyHistory() throws IOException, ManagerSaveException {
         FileBackedTasksManager fileManager = new FileBackedTasksManager( file);
         fileManager.save();
-        fileManager.loadFromFile(file);
+        fileManager.loadFromFile();
         assertEquals(Collections.EMPTY_LIST, manager.getHistory());
     }
 }

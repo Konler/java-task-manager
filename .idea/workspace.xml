@@ -1,23 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ab20c46e-51b1-4474-9a08-57a42804b2cf" name="Default Changelist" comment="С тестами">
-      <change afterPath="$PROJECT_DIR$/Test/manager/FileBackedTasksManagerTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Test/manager/InMemoryHistoryManagerTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Test/manager/InMemoryTaskManagerTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Test/manager/TaskManagerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/java-kanban.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/java-kanban.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/file.CSV" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/manager/FileBackedTasksManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/manager/FileBackedTasksManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/manager/InMemoryHistoryManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/manager/InMemoryHistoryManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/manager/InMemoryTaskManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/manager/InMemoryTaskManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/manager/Node.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/manager/Node.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/manager/TaskManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/manager/TaskManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/task/Epic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/task/Epic.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/task/SubTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/task/SubTask.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/task/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/task/Task.java" afterDir="false" />
-    </list>
+    <list default="true" id="ab20c46e-51b1-4474-9a08-57a42804b2cf" name="Default Changelist" comment="С тестами12/01" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -311,8 +295,16 @@
       <workItem from="1673477247912" duration="5394000" />
       <workItem from="1673520478211" duration="4686000" />
       <workItem from="1673541280904" duration="1303000" />
-      <workItem from="1673548551241" duration="4767000" />
+      <workItem from="1673548551241" duration="5168000" />
     </task>
+    <task id="LOCAL-00001" summary="С тестами12/01">
+      <created>1673553765073</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1673553765073</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -398,7 +390,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="С тестами" />
-    <option name="LAST_COMMIT_MESSAGE" value="С тестами" />
+    <MESSAGE value="С тестами12/01" />
+    <option name="LAST_COMMIT_MESSAGE" value="С тестами12/01" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
