@@ -7,15 +7,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Epic extends Task {
-    private List<Integer> subTaskIds = new ArrayList<>();
 
-    public Epic(String name, String description, Status status, Instant startTime,Duration duration) {
-        super(name, description, status);
+    private final ArrayList<Integer> subTaskIds = new ArrayList<>();
+    private Instant endTime;
 
-    }
-    public Epic(String name, String description, Instant startTime,Duration duration) {
-        super(name, description);
 
+    public Epic(String name, String description, Status status, Instant startTime, Duration duration) {
+        super(name, description, status, startTime, duration);
+        this.endTime = super.getEndTime();
     }
 
     public List<Integer> getSubTaskIds() {
@@ -23,9 +22,7 @@ public class Epic extends Task {
         return subTaskIds;
     }
 
-    public void setSubTaskIds(ArrayList<Integer> subTaskIds) {
-        this.subTaskIds = subTaskIds;
-    }
+
 
     public void deleteSubTaskByIdFromEpic(Integer subTaskId) {
         subTaskIds.remove(subTaskId);

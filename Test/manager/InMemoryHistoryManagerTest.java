@@ -88,4 +88,5 @@ public class InMemoryHistoryManagerTest {
         manager.remove(task2.getId());
         assertEquals(Collections.EMPTY_LIST, manager.getHistory());
     }
+
 }

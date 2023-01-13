@@ -48,8 +48,6 @@ public class Task {
         this.startTime = startTime;
     }
 
-
-
     public Instant getEndTime(){
         return startTime.plus(duration);
     }
@@ -73,10 +71,7 @@ public class Task {
     public String getName() {
         return name;
     }
-
-    public void setName(String name) {
-        this.name = name;
-    }
+    
 
     public Status getStatus() {
         return status;

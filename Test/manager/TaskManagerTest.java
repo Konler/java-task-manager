@@ -1,7 +1,5 @@
 package manager;
 
-
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import task.Epic;
 import task.Status;
@@ -12,13 +10,29 @@ import java.io.IOException;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
  abstract class TaskManagerTest<T extends TaskManager> {
  
   public T manager;
+
+     @Test
+     public void shouldReturnHistoryWithTasks() throws IOException, ManagerSaveException {
+         Epic epic=new Epic("Epic5","Description", Status.NEW, Instant.ofEpochMilli(4567890l), Duration.ofMinutes(15));
+         manager.createEpic(epic);
+         SubTask subTask=new SubTask("SubTask5","Description", Status.NEW, Instant.ofEpochMilli(567890l), Duration.ofMinutes(15),epic.getId());
+         manager.createSubTask(subTask);
+         manager.getEpicById(epic.getId());
+         manager.getSubTaskById(subTask.getId());
+         List<Task> list = manager.getHistory();
+         assertEquals(2, list.size());
+         assertTrue(list.contains(subTask));
+         assertTrue(list.contains(epic));
+     }
 
     @Test
     void getHistory() {
@@ -105,6 +119,9 @@ import static org.junit.jupiter.api.Assertions.*;
        manager.createTask(task);
         assertEquals(task,manager.getTaskById(task.getId()));
         assertNotNull(manager.getTaskById(task.getId()));
+        List<Task> tasks = manager.getAllTasks();
+        assertEquals(Status.NEW, task.getStatus());
+        assertEquals(List.of(task), tasks);
     }
 
     @Test
@@ -113,6 +130,10 @@ import static org.junit.jupiter.api.Assertions.*;
         manager.createEpic(epic);
         assertEquals(epic,manager.getEpicById(epic.getId()));
         assertNotNull(manager.getEpicById(epic.getId()));
+        List<Epic> epics = manager.getAllEpics();
+        assertEquals(Status.NEW, epic.getStatus());
+        assertEquals(Collections.EMPTY_LIST, epic.getSubTaskIds());
+        assertEquals(List.of(epic), epics);
     }
 
     @Test
@@ -123,15 +144,21 @@ import static org.junit.jupiter.api.Assertions.*;
         manager.createSubTask(subTask);
         assertEquals(subTask,manager.getSubTaskById(subTask.getId()));
         assertNotNull(manager.getSubTaskById(subTask.getId()));
+        List<SubTask> subtasks = manager.getAllSubTasks();
+        assertNotNull(subTask.getStatus());
+        assertEquals(epic.getId(), subTask.getEpicId());
+        assertEquals(Status.NEW, subTask.getStatus());
+        assertEquals(List.of(subTask), subtasks);
+        assertEquals(List.of(subTask.getId()), epic.getSubTaskIds());
+
     }
 
     @Test
-    void createSubTaskNullPoint() throws IOException, ManagerSaveException {
+    void createSubTaskNullPoint() {
         SubTask subTask=new SubTask("SubTask5","Description", Status.NEW, Instant.ofEpochMilli(567890l), Duration.ofMinutes(15),10);
         assertThrows(NullPointerException.class,()->{
             manager.getSubTaskById(subTask.getId());
         });
-
     }
 
     @Test
@@ -155,9 +182,17 @@ import static org.junit.jupiter.api.Assertions.*;
         assertEquals(subTask,manager.getSubTaskById(subTask.getId()));
         assertNotNull(manager.getSubTaskById(subTask.getId()));
     }
+     @Test
+     public void shouldUpdateTaskStatus() throws IOException, ManagerSaveException {
+         Task task=new Task("Task1","Description1", Status.NEW, Instant.ofEpochMilli(4567890l), Duration.ofMinutes(5));
+         manager.createTask(task);
+         task.setStatus(Status.IN_PROGRESS);
+         manager.updateTask(task);
+         assertEquals(Status.IN_PROGRESS, manager.getTaskById(task.getId()).getStatus());
+     }
 
     @Test
-    void updateSubTask2() throws IOException, ManagerSaveException {
+    void updateSubTask2()  {
         SubTask subTask=new SubTask("SubTask5","Description", Status.NEW, Instant.ofEpochMilli(567890l), Duration.ofMinutes(15),10);
         assertThrows(Exception.class,()->{
             manager.updateSubTask(subTask);
@@ -173,6 +208,34 @@ import static org.junit.jupiter.api.Assertions.*;
         assertEquals(epic,manager.getEpicById(epic.getId()));
         assertNotNull(manager.getEpicById(epic.getId()));
     }
+     @Test
+     public void shouldUpdateSubtaskStatusToInProgress() throws IOException, ManagerSaveException {
+         Epic epic=new Epic("Epic5","Description", Status.NEW, Instant.ofEpochMilli(4567890l), Duration.ofMinutes(15));
+         manager.createEpic(epic);
+         SubTask subTask=new SubTask("SubTask5","Description", Status.NEW, Instant.ofEpochMilli(567890l), Duration.ofMinutes(15),epic.getId());
+         manager.createSubTask(subTask);
+         subTask.setStatus(Status.IN_PROGRESS);
+         manager.updateSubTask(subTask);
+         assertEquals(Status.IN_PROGRESS, manager.getSubTaskById(subTask.getId()).getStatus());
+         assertEquals(Status.IN_PROGRESS, manager.getEpicById(epic.getId()).getStatus());
+     }
+
+     @Test
+     public void shouldUpdateTaskStatusToInDone() throws IOException, ManagerSaveException {
+         Task task=new Task("Task1","Description1", Status.NEW, Instant.ofEpochMilli(4567890l), Duration.ofMinutes(5));
+         manager.createTask(task);
+         task.setStatus(Status.DONE);
+         manager.updateTask(task);
+         assertEquals(Status.DONE, manager.getTaskById(task.getId()).getStatus());
+     }
+
+     @Test
+     public void shouldUpdateEpicStatusToInDone() throws IOException, ManagerSaveException {
+         Epic epic=new Epic("Epic5","Description", Status.NEW, Instant.ofEpochMilli(4567890l), Duration.ofMinutes(15));
+         manager.createEpic(epic);
+         epic.setStatus(Status.DONE);
+         assertEquals(Status.DONE, manager.getEpicById(epic.getId()).getStatus());
+     }
 
     @Test
     void deleteTaskById() throws IOException, ManagerSaveException {
@@ -224,18 +287,18 @@ import static org.junit.jupiter.api.Assertions.*;
         assertNotNull(manager.getEpicSubTasksByEpicId(epic.getId()));
     }
 
-    @Test
+    @Test//   a.   Пустой список подзадач.
     void shouldStatusNewIfNoSubtasksresolveEpicNewStatus() throws IOException, ManagerSaveException {
-        Epic epic=new Epic("Epic5","Description", Instant.ofEpochMilli(4567890l), Duration.ofMinutes(15));
+        Epic epic=new Epic("Epic1","Decription1",Status.NEW,Instant.ofEpochMilli(987654456l),Duration.ofMinutes(7));
         manager.createEpic(epic);
         manager.resolveEpicNewStatus(epic);
         assertEquals(Status.NEW,manager.getEpics().get(epic.getId()).getStatus());
         assertNotNull(manager.getEpics().get(epic.getId()).getStatus());
     }
 
-    @Test
+    @Test//b.   Все подзадачи со статусом NEW.
     void shouldStatusNewIfAllSubtasksNewresolveEpicNewStatus() throws IOException, ManagerSaveException {
-        Epic epic=new Epic("Epic5","Description", Instant.ofEpochMilli(4567890l), Duration.ofMinutes(15));
+        Epic epic=new Epic("Epic1","Decription1",Status.NEW,Instant.ofEpochMilli(987654456l),Duration.ofMinutes(7));
         manager.createEpic(epic);
         manager.resolveEpicNewStatus(epic);
         assertEquals(Status.NEW,manager.getEpics().get(epic.getId()).getStatus());
@@ -248,9 +311,9 @@ import static org.junit.jupiter.api.Assertions.*;
     }
 
 
-    @Test
-    void shouldStatusNewIfAllSubtasksDoneResolveEpicNewStatus() throws IOException, ManagerSaveException {
-        Epic epic=new Epic("Epic5","Description", Instant.ofEpochMilli(4567890l), Duration.ofMinutes(15));
+    @Test//Все подзадачи со статусом DONE.
+    void shouldStatusDoneIfAllSubtasksDoneResolveEpicNewStatus() throws IOException, ManagerSaveException {
+        Epic epic=new Epic("Epic1","Decription1",Status.NEW,Instant.ofEpochMilli(987654456l),Duration.ofMinutes(7));
         manager.createEpic(epic);
         manager.resolveEpicNewStatus(epic);
         assertEquals(Status.NEW,manager.getEpics().get(epic.getId()).getStatus());
@@ -262,9 +325,9 @@ import static org.junit.jupiter.api.Assertions.*;
         assertNotNull(manager.getEpics().get(epic.getId()).getStatus());
     }
 
-    @Test
+    @Test//d.    Подзадачи со статусами NEW и DONE.
     void shouldStatusNewIfAllSubtasksNewrAndDoneResolveEpicNewStatus() throws IOException, ManagerSaveException {
-        Epic epic=new Epic("Epic5","Description", Instant.ofEpochMilli(4567890l), Duration.ofMinutes(15));
+        Epic epic=new Epic("Epic1","Decription1",Status.NEW,Instant.ofEpochMilli(987654456l),Duration.ofMinutes(7));
         manager.createEpic(epic);
         manager.resolveEpicNewStatus(epic);
         assertEquals(Status.NEW,manager.getEpics().get(epic.getId()).getStatus());
@@ -276,9 +339,9 @@ import static org.junit.jupiter.api.Assertions.*;
         assertNotNull(manager.getEpics().get(epic.getId()).getStatus());
     }
 
-    @Test
-    void shouldStatusNewIfAllSubtasksInProgressResolveEpicNewStatus() throws IOException, ManagerSaveException {
-        Epic epic=new Epic("Epic5","Description", Instant.ofEpochMilli(4567890l), Duration.ofMinutes(15));
+    @Test// e.    Подзадачи со статусом IN_PROGRESS.
+    void shouldStatusInProgressIfAllSubtasksInProgressResolveEpicNewStatus() throws ManagerSaveException, IOException {
+        Epic epic=new Epic("Epic1","Decription1",Status.NEW,Instant.ofEpochMilli(987654456l),Duration.ofMinutes(7));
         manager.createEpic(epic);
         manager.resolveEpicNewStatus(epic);
         assertEquals(Status.NEW,manager.getEpics().get(epic.getId()).getStatus());
@@ -289,4 +352,5 @@ import static org.junit.jupiter.api.Assertions.*;
         assertEquals(Status.IN_PROGRESS,manager.getEpics().get(epic.getId()).getStatus());
         assertNotNull(manager.getEpics().get(epic.getId()).getStatus());
     }
+
 }

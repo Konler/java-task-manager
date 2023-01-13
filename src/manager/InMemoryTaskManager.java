@@ -40,7 +40,7 @@ public class InMemoryTaskManager implements TaskManager {
     public TreeSet<Task> prioritizedTaskSet = new TreeSet<>(Comparator.nullsLast(Comparator.comparing(Task::getStartTime)).
             thenComparing(Task::getId));
 
-    public List<Task> getPrioritizedTasks() {
+    private List<Task> getPrioritizedTasks() {
         return new ArrayList<>(prioritizedTaskSet);
     }
     private void addTask(Task task) {
@@ -57,7 +57,7 @@ public class InMemoryTaskManager implements TaskManager {
         }
     }
 
-    public boolean isCrossing(Task task){
+    private boolean isCrossing(Task task){
         for (Task t:prioritizedTaskSet){
             if (task.getStartTime().isAfter((t.getStartTime())) && task.getEndTime().isBefore(t.getEndTime())
                         || task.getEndTime().isBefore(t.getStartTime()) && task.getEndTime().isAfter(t.getEndTime())) {
@@ -82,9 +82,7 @@ public class InMemoryTaskManager implements TaskManager {
 //        }
 //    }
 
-    public HistoryManager getHistoryManager() {
-        return historyManager;
-    }
+
 
 
     @Override
@@ -93,19 +91,22 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     @Override
-    public Task getTaskById(Integer taskId) throws IOException, ManagerSaveException {
+    public Task getTaskById(Integer taskId) throws ManagerSaveException {
         historyManager.add(tasks.get(taskId));
         return tasks.get(taskId);
     }
 
     @Override
-    public SubTask getSubTaskById(Integer subTaskId) throws IOException, ManagerSaveException {
-        historyManager.add(subTasks.get(subTaskId));
-        return subTasks.get(subTaskId);
+    public SubTask getSubTaskById(Integer subTaskId) throws ManagerSaveException {
+        if (subTasks.containsKey(subTaskId)) {
+            historyManager.add(subTasks.get(subTaskId));
+            return subTasks.get(subTaskId);
+        }
+       return null;
     }
 
     @Override
-    public Epic getEpicById(Integer epicId) throws IOException, ManagerSaveException {
+    public Epic getEpicById(Integer epicId) throws ManagerSaveException {
         historyManager.add(epics.get(epicId));
         return epics.get(epicId);
     }
@@ -165,7 +166,7 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     @Override
-    public void createTask(Task task) throws IOException, ManagerSaveException {
+    public void createTask(Task task) throws ManagerSaveException {
         task.setId(getNextId());
             if(task!=null){
                 if(isCrossing(task)){
@@ -183,7 +184,7 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     @Override
-    public void createEpic(Epic epic) throws IOException, ManagerSaveException {
+    public void createEpic(Epic epic) throws ManagerSaveException {
         epic.setId(getNextId());
         epics.put(epic.getId(), epic);
         resolveEpicNewStatus(epic);
@@ -192,26 +193,29 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     @Override
-    public void createSubTask(SubTask subTask) throws IOException, ManagerSaveException {
-        if (epics.containsKey(subTask.getEpicId())) {
-            subTask.setId(getNextId());
-            epics.get(subTask.getEpicId()).getSubTaskIds().add(subTask.getId());
-            if(subTask!=null){
-                if(isCrossing(subTask)){
-                    System.out.println("Пересечение задач!"+subTask);
-                    return;
+    public void createSubTask(SubTask subTask) throws ManagerSaveException {
+        if (subTask!=null) {
+            if (epics.containsKey(subTask.getEpicId())) {
+                subTask.setId(getNextId());
+                epics.get(subTask.getEpicId()).getSubTaskIds().add(subTask.getId());
+                if (subTask != null) {
+                    if (isCrossing(subTask)) {
+                        System.out.println("Пересечение задач!" + subTask);
+                        return;
+                    }
+                    subTasks.put(subTask.getId(), subTask);
+                    prioritizedTaskSet.add(subTask);
+                } else {
+                    System.out.println("Задача не найдена");
                 }
-                subTasks.put(subTask.getId(), subTask);
-                prioritizedTaskSet.add(subTask);
-            }else {
-                System.out.println("Задача не найдена");
+                resolveEpicNewStatus(epics.get(subTask.getEpicId()));
+                resolveDurations(epics.get(subTask.getEpicId()));
+                resolveStartTime(epics.get(subTask.getEpicId()));
+            } else {
+                System.out.println("SubTask не может быть создана без Epic");
             }
-            resolveEpicNewStatus(epics.get(subTask.getEpicId()));
-            resolveDurations(epics.get(subTask.getEpicId()));
-            resolveStartTime(epics.get(subTask.getEpicId()));
-        } else {
-            System.out.println("SubTask не может быть создана без Epic");
         }
+
     }
 
     @Override
@@ -236,7 +240,7 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     @Override
-    public void updateEpic(Epic epic) throws IOException, ManagerSaveException {
+    public void updateEpic(Epic epic) throws ManagerSaveException {
         if (epics.containsKey((epic.getId()))) {
             epics.put(epic.getId(), epic);
             resolveEpicNewStatus(epic);
@@ -266,7 +270,7 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     @Override
-    public void deleteSubTaskById(Integer subTaskId) throws IOException, ManagerSaveException {
+    public void deleteSubTaskById(Integer subTaskId) throws ManagerSaveException {
         SubTask subtask = getSubTaskById(subTaskId);
         if (subtask != null) {
             Epic epic = getEpicById(subtask.getEpicId());
@@ -349,9 +353,9 @@ public class InMemoryTaskManager implements TaskManager {
 
     private void resolveStartTime(Epic epic) {
         boolean noSubtasks = epic.getSubTaskIds().isEmpty();
-        Instant startTime = null;
+        Instant startTime = Instant.ofEpochMilli(0);
         if (noSubtasks) {
-            epic.setStartTime(Instant.now());
+            epic.setStartTime(startTime);
         } else {
             for (SubTask subTask : getEpicSubTasksByEpicId(epic.getId())) {
                 Instant startTimeTemp = subTask.getStartTime();
