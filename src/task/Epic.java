@@ -1,15 +1,19 @@
 package task;
 
+import manager.InMemoryTaskManager;
+import manager.Managers;
+
 import java.time.Duration;
 import java.time.Instant;
-import java.time.LocalTime;
+
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class Epic extends Task {
 
     private final ArrayList<Integer> subTaskIds = new ArrayList<>();
-    private Instant endTime;
+   final private Instant endTime;
 
 
     public Epic(String name, String description, Status status, Instant startTime, Duration duration) {
@@ -18,11 +22,8 @@ public class Epic extends Task {
     }
 
     public List<Integer> getSubTaskIds() {
-
         return subTaskIds;
     }
-
-
 
     public void deleteSubTaskByIdFromEpic(Integer subTaskId) {
         subTaskIds.remove(subTaskId);

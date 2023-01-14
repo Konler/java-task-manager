@@ -9,7 +9,7 @@ public class InMemoryHistoryManager implements HistoryManager {
     public static Map<Integer, Node<Task>> historyHash = new HashMap<>();
     private Node<Task> head;
     private Node<Task> tail;
-    private int size;
+
 
     @Override
     public void add(Task task) {
@@ -46,7 +46,7 @@ public class InMemoryHistoryManager implements HistoryManager {
             oldTail.next = tail;
             tail.prev = oldTail;
         }
-        size++;
+
         InMemoryHistoryManager.historyHash.put(task.getId(), tail);
     }
 

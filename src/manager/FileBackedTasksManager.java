@@ -16,48 +16,10 @@ import java.util.List;
 
 public class FileBackedTasksManager extends InMemoryTaskManager {
     File file;
-    HashMap<Integer, Task> tasks = super.tasks;
-    private final HashMap<Integer, SubTask> subTasks = super.subTasks;
-    private final HashMap<Integer, Epic> epics = super.epics;
-    private final HistoryManager historyManager = super.historyManager;
-
-    public FileBackedTasksManager(File file) {
+        public FileBackedTasksManager(File file) {
         this.file = file;
 
     }
-
-//    public static void main(String[] args) throws Exception {
-//        File file = new File("file.CSV");
-//        FileBackedTasksManager fileBackedTasksManager = new FileBackedTasksManager(file);
-//
-//        Task task1 = new Task("Task1", "Description task1", Status.NEW, Instant.now(),Duration.ofMinutes(15));
-//        System.out.println("Старт: "+task1.getStartTime()+" Окончание: "+task1.getEndTime());
-//        fileBackedTasksManager.createTask(task1);
-//
-//        Task task2 = new Task("Task2", "Description", Status.IN_PROGRESS,Instant.ofEpochMilli(99876),Duration.ofMinutes(15));
-//        System.out.println("Старт: "+task2.getStartTime()+" Окончание: "+task2.getEndTime());
-//        fileBackedTasksManager.createTask(task2);
-//
-//
-//        Epic epic1 = new Epic("Epic1", "Description", Status.NEW,Instant.ofEpochMilli(0),Duration.ofMinutes(0));
-//        fileBackedTasksManager.createEpic(epic1);
-//
-//        SubTask subTask1 = new SubTask("SubTask1", "Description",  Status.NEW,Instant.ofEpochMilli(4334568776543L), Duration.ofMinutes(15),epic1.getId());
-//        fileBackedTasksManager.createSubTask(subTask1);
-//        fileBackedTasksManager.updateEpic(epic1);
-//        System.out.println("Старт CAB: "+subTask1.getStartTime()+" Окончание: "+subTask1.getEndTime());
-//
-//        fileBackedTasksManager.getTaskById(task1.getId());
-//        fileBackedTasksManager.getTaskById(task2.getId());
-//        fileBackedTasksManager.getTaskById(task1.getId());
-//        fileBackedTasksManager.getEpicById(epic1.getId());
-//        fileBackedTasksManager.getSubTaskById(subTask1.getId());
-//
-//
-//        FileBackedTasksManager fileBackedTasksManager1 = new FileBackedTasksManager(new File("file2.CVS"));
-//        fileBackedTasksManager1.loadFromFile();
-//        System.out.println(fileBackedTasksManager.getPrioritizedTasks());
-//    }
 
     void save() throws ManagerSaveException {//метод будет сохранять текущее состояние менеджера в указанный файл
         String s = file.getName();//получить имя файла
@@ -129,11 +91,6 @@ public class FileBackedTasksManager extends InMemoryTaskManager {
         super.createSubTask(subTask);
         super.getSubTaskById(subTask.getId());
         save();
-    }
-
-    @Override
-    public ArrayList<SubTask> getEpicSubTasksByEpicId(Integer epicId) {
-        return super.getEpicSubTasksByEpicId(epicId);
     }
 
     static String toString(Task task) {

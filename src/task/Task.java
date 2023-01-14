@@ -13,13 +13,13 @@ public class Task {
     private Status status;
     private Duration duration;
     private Instant startTime;
-    
+
     public Task(String name, String description, Status status, Instant startTime, Duration duration) {
         this.name = name;
         this.description = description;
         this.status = status;
-        this.startTime=startTime;
-        this.duration=duration;
+        this.startTime = startTime;
+        this.duration = duration;
     }
 
     public Task(String name, String description, Status status) {
@@ -27,6 +27,7 @@ public class Task {
         this.description = description;
         this.status = status;
     }
+
     public Task(String name, String description) {
         this.name = name;
         this.description = description;
@@ -48,7 +49,7 @@ public class Task {
         this.startTime = startTime;
     }
 
-    public Instant getEndTime(){
+    public Instant getEndTime() {
         return startTime.plus(duration);
     }
 
@@ -71,7 +72,7 @@ public class Task {
     public String getName() {
         return name;
     }
-    
+
 
     public Status getStatus() {
         return status;

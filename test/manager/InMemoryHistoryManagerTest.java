@@ -35,7 +35,7 @@ public class InMemoryHistoryManagerTest {
 
     @AfterEach
     public void endTest() throws IOException {
-         final Path path = Path.of("file.CSV");
+        final Path path = Path.of("file.CSV");
         new FileOutputStream(path.toFile(), false).close();
     }
 

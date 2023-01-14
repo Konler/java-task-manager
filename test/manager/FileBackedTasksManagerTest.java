@@ -23,13 +23,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class FileBackedTasksManagerTest extends TaskManagerTest<FileBackedTasksManager> {
 
-    //Path path = Path.of("file.csv");
     public static final Path path = Path.of("file.CSV");
     File file;
 
     @BeforeEach
     public void beforeEach() {
-         file= new File(String.valueOf(path));
+        file = new File(String.valueOf(path));
         manager = new FileBackedTasksManager(file);
     }
 
@@ -43,20 +42,20 @@ class FileBackedTasksManagerTest extends TaskManagerTest<FileBackedTasksManager>
     }
 
     @Test
-    public void shouldCorrectlySaveAndLoad() throws  ManagerSaveException {
-        Task task=new Task("Task1","Description1", Status.NEW, Instant.ofEpochMilli(4567890l), Duration.ofMinutes(5));
+    public void shouldCorrectlySaveAndLoad() throws ManagerSaveException {
+        Task task = new Task("Task1", "Description1", Status.NEW, Instant.ofEpochMilli(4567890l), Duration.ofMinutes(5));
         manager.createTask(task);
-        Epic epic=new Epic("Epic1","Decription1",Status.NEW,Instant.ofEpochMilli(987654456l),Duration.ofMinutes(7));
+        Epic epic = new Epic("Epic1", "Decription1", Status.NEW, Instant.ofEpochMilli(987654456l), Duration.ofMinutes(7));
         manager.createEpic(epic);
-        FileBackedTasksManager fileManager = new FileBackedTasksManager( file);
+        FileBackedTasksManager fileManager = new FileBackedTasksManager(file);
         FileBackedTasksManager.loadFromFile(file);
         assertEquals(List.of(task), manager.getAllTasks());
         assertEquals(List.of(epic), manager.getAllEpics());
     }
 
     @Test
-    public void shouldSaveAndLoadEmptyTasksEpicsSubtasks() throws  ManagerSaveException {
-        FileBackedTasksManager fileManager = new FileBackedTasksManager( file);
+    public void shouldSaveAndLoadEmptyTasksEpicsSubtasks() throws ManagerSaveException {
+        FileBackedTasksManager fileManager = new FileBackedTasksManager(file);
         fileManager.save();
         FileBackedTasksManager.loadFromFile(file);
         assertEquals(Collections.EMPTY_LIST, manager.getAllTasks());
@@ -66,24 +65,24 @@ class FileBackedTasksManagerTest extends TaskManagerTest<FileBackedTasksManager>
 
     @Test
     public void shouldSaveAndLoadEmptyHistory() throws ManagerSaveException {
-        FileBackedTasksManager fileManager = new FileBackedTasksManager( file);
+        FileBackedTasksManager fileManager = new FileBackedTasksManager(file);
         fileManager.save();
         FileBackedTasksManager.loadFromFile(file);
         assertEquals(Collections.EMPTY_LIST, manager.getHistory());
     }
 
     @Test
-    public void souldTrowExcepyionWhenLoadFromFile(){
-        manager=new FileBackedTasksManager(file);
+    public void souldTrowExcepyionWhenLoadFromFile() {
+        manager = new FileBackedTasksManager(file);
         manager.deleteAllSubTasks();
         manager.deleteAllTasks();
         manager.deleteAllEpics();
-        ManagerSaveException exception= Assertions.assertThrows(
+        ManagerSaveException exception = Assertions.assertThrows(
                 ManagerSaveException.class,
-                ()->{
-                    File file=new File("file.CSV");
-                    FileBackedTasksManager fromFile=FileBackedTasksManager.loadFromFile(file);
+                () -> {
+                    File file = new File("file.CSV");
+                    FileBackedTasksManager fromFile = FileBackedTasksManager.loadFromFile(file);
                 });
-        assertEquals("Файл не найден",exception.getMessage());
+        assertEquals("Файл не найден", exception.getMessage());
     }
 }

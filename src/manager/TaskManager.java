@@ -54,13 +54,14 @@ public interface TaskManager {
 
     void resolveEpicNewStatus(Epic epic);
 
-     HashMap<Integer, Task> getTasks();
+    HashMap<Integer, Task> getTasks();
 
 
-     HashMap<Integer, SubTask> getSubTasks();
+    HashMap<Integer, SubTask> getSubTasks();
 
-     HashMap<Integer, Epic> getEpics() ;
+    HashMap<Integer, Epic> getEpics();
 
+    List<Task> getPrioritizedTasks();
 
 }
 
