@@ -21,25 +21,19 @@ abstract class TaskManagerTest<T extends TaskManager> {
     public T manager;
 
     @Test
-    void shouldGetPrioritizedTasksNormal() throws IOException, ManagerSaveException {
-        Task task = new Task("Task1", "Description1", Status.NEW, Instant.ofEpochMilli(-1000), Duration.ofMinutes(1));
+    void shouldCheckCrossingTasks() throws IOException, ManagerSaveException {
+        Task task = new Task("Task1", "Description1", Status.NEW, Instant.ofEpochMilli(4567890l), Duration.ofMinutes(5));
         manager.createTask(task);
-        Task task2 = new Task("Task2", "Description2", Status.NEW, Instant.ofEpochMilli(1000), Duration.ofMinutes(1));
-        manager.createTask(task2);
-        Epic epic = new Epic("Epic1", "Decription1", Status.NEW, Instant.ofEpochMilli(100000), Duration.ofMinutes(1));
-        manager.createEpic(epic);
-        SubTask subTask = new SubTask("SubTask1", "Description1", Status.NEW, Instant.ofEpochMilli(10000000), Duration.ofMinutes(2), epic.getId());
-        manager.createSubTask(subTask);
-        SubTask subTask2 = new SubTask("SubTask2", "Description2", Status.NEW, Instant.ofEpochMilli(-10000), Duration.ofMinutes(1), epic.getId());
-        manager.createSubTask(subTask2);
-        List<Task> prioritizedTasks = new ArrayList<>();
-        prioritizedTasks.add(task);
-        prioritizedTasks.add(task2);
-        prioritizedTasks.add(subTask);
-        prioritizedTasks.add(subTask2);
-        assertTrue((manager.getPrioritizedTasks().size() == 4), "Количество подзадач = 4");
-        //assertEquals(manager.getPrioritizedTasks(), prioritizedTasks, "Количество подзадач = 4");
-    }
+        Task task1=new Task("Task1", "Description1", Status.NEW, Instant.ofEpochMilli(4567992l), Duration.ofMinutes(5));
+        ManagerSaveException exception = assertThrows(
+
+                ManagerSaveException.class, () ->{ manager.createTask(task1);
+    });
+
+assertEquals("Пересечение задач!"+task1.getId()+"не сохранена",exception.getMessage());
+}
+
+
 
     @Test
     public void shouldReturnHistoryWithTasks() throws IOException, ManagerSaveException {

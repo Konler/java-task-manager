@@ -1,11 +1,29 @@
+import manager.InMemoryTaskManager;
+import manager.ManagerSaveException;
+import manager.TaskManager;
 import task.Epic;
+import task.Status;
 import task.SubTask;
 import task.Task;
 
+import java.io.IOException;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
-
 public class Main {
+
+public static void main(String[]args) throws IOException, ManagerSaveException {
+
+    TaskManager in = new InMemoryTaskManager();
+
+    Task task = new Task("Task1", "Description1", Status.NEW, Instant.ofEpochMilli(4567890l), Duration.ofMinutes(5));
+    in.createTask(task);
+
+    Task task1 = new Task("Task1", "Description1", Status.NEW, Instant.ofEpochMilli(4567992l), Duration.ofMinutes(5));
+    in.createTask(task);
+}
+}
 
 //    public static void main(String[] args) throws IOException, ManagerSaveException {
 //        TaskManager taskManager = Managers.getDefault();
@@ -73,40 +91,5 @@ public class Main {
 //        taskManager.deleteAllEpics();
 //        System.out.println("Удалили эпики.");
 //        printHistory(taskManager.getHistory());
-//    }
 
-    private static void printHistory(List<Task> tasks) {
-        System.out.println("История просмотров:");
-        if (tasks.isEmpty()) {
-            System.out.println("История просмотров пуста");
-        } else {
-            for (Task task : tasks) {
-                System.out.println(task.getId());
-            }
-        }
-    }
-
-    private static void printTasks(ArrayList<Task> tasks) {
-        for (Task task : tasks) {
-            System.out.println("Имя задачи: " + task.getName() + "; Id задачи: " + task.getId() + "; Описание задачи: "
-                    + task.getDescription() + "; Статус задачи: " + task.getStatus());
-        }
-    }
-
-    private static void printSubTasks(ArrayList<SubTask> subTasks) {
-        for (SubTask subtask : subTasks) {
-            System.out.println("Имя подзадачи: " + subtask.getName() + "; Id подзадачи: " + subtask.getId()
-                    + "; Описание подзадачи: " + subtask.getDescription() + "; Статус подзадачи: " + subtask.getStatus());
-        }
-    }
-
-    private static void printEpics(ArrayList<Epic> epics) {
-        for (Epic epic : epics) {
-            System.out.println("Имя эпика: " + epic.getName() + "; Id эпика: " + epic.getId()
-                    + "; Описание эпика: " + epic.getDescription() + "; Статус эпика: " + epic.getStatus());
-        }
-    }
-
-
-}
 

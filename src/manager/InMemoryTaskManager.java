@@ -1,20 +1,14 @@
 package manager;
 
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.function.Executable;
 import task.Epic;
 import task.Status;
 import task.SubTask;
 import task.Task;
 
-import java.io.IOException;
+
 import java.time.Duration;
 import java.time.Instant;
-import java.time.LocalDateTime;
 import java.util.*;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class InMemoryTaskManager implements TaskManager {
     public final HashMap<Integer, Task> tasks;
@@ -52,13 +46,15 @@ public class InMemoryTaskManager implements TaskManager {
         return new ArrayList<>(prioritizedTaskSet);
     }
 
-    private boolean isCrossing(Task task){
-        for (Task t:prioritizedTaskSet){
-            if (task.getStartTime().isAfter((t.getStartTime())) && task.getEndTime().isBefore(t.getEndTime())
-                    || task.getEndTime().isBefore(t.getStartTime()) && task.getEndTime().isAfter(t.getEndTime())) {
+    private boolean isCrossing(Task task) {
+        for (Task t : prioritizedTaskSet) {
+            if (task.getStartTime().isAfter(t.getStartTime()) && task.getStartTime().isBefore(t.getEndTime())) {
+                return true;
+            } else if (task.getEndTime().isAfter(t.getStartTime()) && task.getEndTime().isBefore(t.getEndTime())) {
+                return true;
+            } else if (task.getStartTime().equals(t.getStartTime()) || task.getEndTime().equals(t.getEndTime())) {
                 return true;
             }
-            break;
         }
         return false;
     }
@@ -150,8 +146,7 @@ public class InMemoryTaskManager implements TaskManager {
         task.setId(getNextId());
         if (task != null) {
             if (isCrossing(task)) {
-                System.out.println("Пересечение задач!" + task);
-                return;
+                throw new ManagerSaveException("Пересечение задач!"+task.getId()+"не сохранена");
             }
             tasks.put(task.getId(), task);
             prioritizedTaskSet.add(task);
