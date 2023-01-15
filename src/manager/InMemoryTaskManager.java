@@ -5,7 +5,6 @@ import task.Status;
 import task.SubTask;
 import task.Task;
 
-
 import java.time.Duration;
 import java.time.Instant;
 import java.util.*;
@@ -59,7 +58,7 @@ public class InMemoryTaskManager implements TaskManager {
         return false;
     }
 
-     @Override
+    @Override
     public List<Task> getHistory() {
         return historyManager.getHistory();
     }
@@ -123,7 +122,7 @@ public class InMemoryTaskManager implements TaskManager {
             iterator.remove();
             historyManager.remove(key);
         }
-        for (Epic epic:epics.values()){
+        for (Epic epic : epics.values()) {
             epic.setStatus(Status.NEW);
         }
     }
@@ -146,7 +145,7 @@ public class InMemoryTaskManager implements TaskManager {
         task.setId(getNextId());
         if (task != null) {
             if (isCrossing(task)) {
-                throw new ManagerSaveException("Пересечение задач!"+task.getId()+"не сохранена");
+                throw new ManagerSaveException("Пересечение задач!" + task.getId() + "не сохранена");
             }
             tasks.put(task.getId(), task);
             prioritizedTaskSet.add(task);

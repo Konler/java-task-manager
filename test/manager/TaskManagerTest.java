@@ -24,15 +24,15 @@ abstract class TaskManagerTest<T extends TaskManager> {
     void shouldCheckCrossingTasks() throws IOException, ManagerSaveException {
         Task task = new Task("Task1", "Description1", Status.NEW, Instant.ofEpochMilli(4567890l), Duration.ofMinutes(5));
         manager.createTask(task);
-        Task task1=new Task("Task1", "Description1", Status.NEW, Instant.ofEpochMilli(4567992l), Duration.ofMinutes(5));
+        Task task1 = new Task("Task1", "Description1", Status.NEW, Instant.ofEpochMilli(4567992l), Duration.ofMinutes(5));
         ManagerSaveException exception = assertThrows(
 
-                ManagerSaveException.class, () ->{ manager.createTask(task1);
-    });
+                ManagerSaveException.class, () -> {
+                    manager.createTask(task1);
+                });
 
-assertEquals("Пересечение задач!"+task1.getId()+"не сохранена",exception.getMessage());
-}
-
+        assertEquals("Пересечение задач!" + task1.getId() + "не сохранена", exception.getMessage());
+    }
 
 
     @Test

@@ -11,12 +11,12 @@ import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class FileBackedTasksManager extends InMemoryTaskManager {
     File file;
-        public FileBackedTasksManager(File file) {
+
+    public FileBackedTasksManager(File file) {
         this.file = file;
 
     }

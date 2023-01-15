@@ -1,6 +1,7 @@
 package task;
 
 import manager.TypeTasks;
+import user.User;
 
 import java.time.Duration;
 import java.time.Instant;
@@ -13,6 +14,38 @@ public class Task {
     private Status status;
     private Duration duration;
     private Instant startTime;
+    protected User user;
+    private static Instant lastTaskTimesUpdate;
+
+
+    public Task(String name, String description, Status status, Duration duration, Instant startTime, User user) {
+        this.name = name;
+        this.description = description;
+        this.status = status;
+        this.duration = duration;
+        this.startTime = startTime;
+        this.user = user;
+    }
+
+    public Task(Integer id, String name, String description, Status status, Duration duration, Instant startTime, User user) {
+        this.id = id;
+        this.name = name;
+        this.status = status;
+        this.description = description;
+        this.duration = duration;
+        this.startTime = startTime;
+        this.user = user;
+    }
+
+    public Task(Task task) {
+        this.id = id;
+        this.name = name;
+        this.status = status;
+        this.description = description;
+        this.duration = duration;
+        this.startTime = startTime;
+        this.user = task.user;
+    }
 
     public Task(String name, String description, Status status, Instant startTime, Duration duration) {
         this.name = name;
@@ -31,6 +64,30 @@ public class Task {
     public Task(String name, String description) {
         this.name = name;
         this.description = description;
+    }
+
+    public Task(String name, String description, Instant startTime, Duration duration) {
+        this.name = name;
+        this.description = description;
+        this.startTime = startTime;
+        this.duration = duration;
+    }
+
+    public void copyFrom(Task task2copy) {
+        this.name = task2copy.name;
+        this.description = task2copy.description;
+        this.status = task2copy.status;
+        this.setDuration(task2copy.duration);
+        this.setStartTime(task2copy.startTime);
+        updateLastTaskTimesUpdate();
+    }
+
+    protected static void updateLastTaskTimesUpdate() {
+        lastTaskTimesUpdate = Instant.now();
+    }
+
+    public User getUser() {
+        return user;
     }
 
     public Duration getDuration() {
@@ -104,5 +161,9 @@ public class Task {
                 description + "," +
                 startTime.toEpochMilli() + "," +
                 duration;
+    }
+
+    public void setName(String s) {
+        this.name = s;
     }
 }
