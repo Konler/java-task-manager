@@ -9,10 +9,7 @@ import task.Task;
 import java.io.IOException;
 import java.time.Duration;
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -77,7 +74,7 @@ abstract class TaskManagerTest<T extends TaskManager> {
 
     @Test
     void deleteAllTasks() {
-        HashMap<Integer, Task> hashTask = manager.getTasks();
+        Map<Integer, Task> hashTask = manager.getTasks();
         hashTask.clear();
         manager.deleteAllTasks();
         assertEquals(hashTask, manager.getTasks());
@@ -86,7 +83,7 @@ abstract class TaskManagerTest<T extends TaskManager> {
 
     @Test
     void deleteAllSubTasks() {
-        HashMap<Integer, SubTask> hashTask = manager.getSubTasks();
+        Map<Integer, SubTask> hashTask = manager.getSubTasks();
         hashTask.clear();
         manager.deleteAllSubTasks();
         assertEquals(hashTask, manager.getSubTasks());
@@ -95,7 +92,7 @@ abstract class TaskManagerTest<T extends TaskManager> {
 
     @Test
     void deleteAllEpics() {
-        HashMap<Integer, Epic> hashTask = manager.getEpics();
+        Map<Integer, Epic> hashTask = manager.getEpics();
         hashTask.clear();
         manager.deleteAllEpics();
         assertEquals(hashTask, manager.getEpics());

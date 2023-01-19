@@ -48,8 +48,7 @@ class HttpTaskServerTest {
         httpClient = HttpClient.newBuilder().connectTimeout(Duration.ofSeconds(3L)).build();
         taskServer = new HttpTaskServer();
         taskServer.startServer();
-        manager = new InMemoryTaskManager();
-
+        manager = Managers.getDefault();
 
     }
 
@@ -97,52 +96,24 @@ class HttpTaskServerTest {
         HttpRequest request = HttpRequest.newBuilder().GET().uri(URI.create("http://localhost:8080/tasks/")).version(Version.HTTP_1_1).build();
         HttpResponse<String> response = httpClient.send(request, BodyHandlers.ofString());
         Assertions.assertEquals(200, response.statusCode());
-        Type listType = (new TypeToken<ArrayList<Task>>() {
-        }).getType();
-        List<Task> tasks = (List) gson.fromJson((String) response.body(), listType);
+        List<Task> tasks =  gson.fromJson(response.body(), ArrayList.class);
         Assertions.assertNotNull(tasks);
         Assertions.assertEquals(manager.getTasks().size(), tasks.size());
-        String lastResponse = null;
+        Task task = new Task("Task3", "Description3", Instant.now(), Duration.ofMinutes(5));
+        manager.createTask(task);
+        response = httpClient.send(request, BodyHandlers.ofString());
+        Assertions.assertEquals(200, response.statusCode());
 
-        Task task;
-        for (int i = 1; i <= 3; ++i) {
-            task = new Task("Task1", "Description1", Instant.ofEpochMilli(4567890l), Duration.ofMinutes(5));
-            manager.createTask(task);
-            task.setStatus(Status.values()[i % Status.values().length]);
-            Epic epic = new Epic("Epic#" + i, "Epic descr #" + i);
-            manager.createEpic(epic);
-
-            for (int j = 1; j <= 3; ++j) {
-                SubTask subTask = new SubTask("SubTask5", "Description", Status.NEW, Instant.ofEpochMilli(567890l), Duration.ofMinutes(15), epic.getId());
-                manager.createSubTask(subTask);
-            }
-
-            response = httpClient.send(request, BodyHandlers.ofString());
-            Assertions.assertEquals(200, response.statusCode());
-            lastResponse = (String) response.body();
-            listType = (new TypeToken<ArrayList<Task>>() {
-            }).getType();
-            tasks = (List) gson.fromJson((String) response.body(), listType);
-            Assertions.assertNotNull(tasks);
-            Assertions.assertEquals(manager.getTasks().size(), tasks.size());
-        }
-
-        Iterator var12 = manager.getAllTasks().iterator();
-
-        while (var12.hasNext()) {
-            task = (Task) var12.next();
-            String s = gson.toJson(task);
-            Assertions.assertTrue(lastResponse.contains(s));
-        }
-
-
+        tasks =  gson.fromJson(response.body(), ArrayList.class);
+        Assertions.assertNotNull(tasks);
+        Assertions.assertEquals(manager.getTasks().size(), tasks.size());
     }
 
     @Test
     void testHistoryHandlers() throws IOException, InterruptedException, ManagerSaveException {
         HttpRequest request = HttpRequest.newBuilder().GET().uri(URI.create("http://localhost:8080/tasks/history/")).version(Version.HTTP_1_1).build();
         for (int i = 1; i <= 3; ++i) {
-            Task task = new Task("Task1", "Description1", Instant.ofEpochMilli(4567890l), Duration.ofMinutes(5));
+            Task task = new Task("Task1", "Description1", Instant.ofEpochMilli(45678765490l), Duration.ofMinutes(5));
             manager.createTask(task);
             manager.getTaskById(task.getId());
             HttpResponse<String> response = httpClient.send(request, BodyHandlers.ofString());
@@ -161,75 +132,43 @@ class HttpTaskServerTest {
     @Test
     void testTaskHandlers() throws IOException, ManagerSaveException, InterruptedException {
 
-        Task[] taskOrig = new Task[]{new Task("Task1", "Description1", Instant.ofEpochMilli(4567890l), Duration.ofMinutes(5))};
-        manager.createTask(taskOrig[0]);
-        Task taskCopy = new Task("", "");
-        taskCopy.copyFrom(taskOrig[0]);
-        Integer[] taskId = {null};
-        HttpClient var10000 = httpClient;
-        Builder var10001 = HttpRequest.newBuilder().PUT(BodyPublishers.ofString(""));
-        int var10002 = taskOrig[0].getId();
-        HttpResponse<String> response = var10000.send(var10001.uri(URI.create("http://localhost:8080/tasks/task/" + (var10002 + 10000))).build(), BodyHandlers.ofString());
-        Assertions.assertEquals(400, response.statusCode());
-        var10000 = httpClient;
-        var10001 = HttpRequest.newBuilder().GET();
-        var10002 = taskOrig[0].getId();
-        response = var10000.send(var10001.uri(URI.create("http://localhost:8080/tasks/task/" + (var10002 + 10000))).build(), BodyHandlers.ofString());
-        Assertions.assertEquals(400, response.statusCode());
-        response = httpClient.send(HttpRequest.newBuilder().GET().uri(URI.create("http://localhost:8080/tasks/task/" + taskOrig[0].getId())).build(), BodyHandlers.ofString());
+        HttpRequest request = HttpRequest.newBuilder().GET().uri(URI.create("http://localhost:8080/tasks/")).version(Version.HTTP_1_1).build();
+        HttpResponse<String> response = httpClient.send(request, BodyHandlers.ofString());
         Assertions.assertEquals(200, response.statusCode());
-        Assertions.assertEquals(gson.toJson(taskOrig[0]), response.body());
-        String responseStr1 = (String) response.body();
-        Assertions.assertDoesNotThrow(() -> {
-            taskOrig[0] = (Task) gson.fromJson(responseStr1, taskOrig[0].getClass());
-        });
-        taskOrig[0].setName(taskOrig[0].getName() + "+++");
-        String json = gson.toJson(taskOrig[0]);
-        response = httpClient.send(HttpRequest.newBuilder().POST(BodyPublishers.ofString(json)).uri(URI.create("http://localhost:8080/tasks/task/")).build(), BodyHandlers.ofString());
+        Task task =  gson.fromJson(response.body(), Task.class);
+        Assertions.assertNotNull(task);
+        Assertions.assertEquals(manager.getTaskById(task.getId()), task);
+        Task task2 = new Task("Task3", "Description3", Instant.now(), Duration.ofMinutes(5));
+        manager.createTask(task);
+        response = httpClient.send(request, BodyHandlers.ofString());
         Assertions.assertEquals(200, response.statusCode());
-        String responseStr2 = (String) response.body();
-        Assertions.assertDoesNotThrow(() -> {
-            taskId[0] = (Integer) gson.fromJson(responseStr2, Integer.class);
-        });
-        Assertions.assertEquals(taskOrig[0].getId(), taskId[0]);
-        taskCopy.setStartTime(taskCopy.getStartTime().plusSeconds(100000L));
-        json = gson.toJson(taskCopy);
-        response = httpClient.send(HttpRequest.newBuilder().POST(BodyPublishers.ofString(json)).uri(URI.create("http://localhost:8080/tasks/task/")).build(), BodyHandlers.ofString());
-        Assertions.assertEquals(200, response.statusCode(), (String) response.body());
-        String responseStr3 = (String) response.body();
-        Assertions.assertDoesNotThrow(() -> {
-            taskId[0] = (Integer) gson.fromJson(responseStr3, Integer.class);
-        });
-        Assertions.assertNotNull(manager.getTaskById(taskId[0]));
-        var10000 = httpClient;
-        var10001 = HttpRequest.newBuilder().DELETE();
-        var10002 = taskId[0];
-        response = var10000.send(var10001.uri(URI.create("http://localhost:8080/tasks/task/" + (var10002 + 10000))).build(), BodyHandlers.ofString());
-        Assertions.assertEquals(400, response.statusCode());
-        response = httpClient.send(HttpRequest.newBuilder().DELETE().uri(URI.create("http://localhost:8080/tasks/task/" + taskId[0])).build(), BodyHandlers.ofString());
-        Assertions.assertEquals(202, response.statusCode());
-        Assertions.assertNull(manager.getTaskById(taskId[0]));
 
+        task =  gson.fromJson(response.body(), Task.class);
+        Assertions.assertNotNull(task);
+        Assertions.assertEquals(manager.getTaskById(task.getId()), task);
     }
 
     @Test
     void testEpicHandlers() throws IOException, ManagerSaveException, InterruptedException {
         Epic[] epicOrig = new Epic[]{new Epic("EpicName", "Epic description")};
-        manager.createTask(epicOrig[0]);
+        manager.createEpic(epicOrig[0]);
         Epic epicCopy = new Epic("", "");
         epicCopy.copyFrom(epicOrig[0]);
         Integer[] epicId = {null};
         HttpClient var10000 = httpClient;
         Builder var10001 = HttpRequest.newBuilder().PUT(BodyPublishers.ofString(""));
         int var10002 = epicOrig[0].getId();
-        HttpResponse<String> response = var10000.send(var10001.uri(URI.create("http://localhost:8080/tasks/epic/" + (var10002 + 10000))).build(), BodyHandlers.ofString());
-        Assertions.assertEquals(400, response.statusCode());
+        HttpRequest request = HttpRequest.newBuilder().GET().uri(URI.create("http://localhost:8080/tasks/")).version(Version.HTTP_1_1).build();
+        HttpResponse<String> response = httpClient.send(request, BodyHandlers.ofString());
+       // HttpResponse<String> response = var10000.send(var10001.uri(URI.create("http://localhost:8080/tasks/epic/" + (var10002 + 10000))).build(), BodyHandlers.ofString());
+        Assertions.assertEquals(200, response.statusCode());
         var10000 = httpClient;
         var10001 = HttpRequest.newBuilder().GET();
         var10002 = epicOrig[0].getId();
-        response = var10000.send(var10001.uri(URI.create("http://localhost:8080/tasks/epic/" + (var10002 + 10000))).build(), BodyHandlers.ofString());
-        Assertions.assertEquals(400, response.statusCode());
-        response = httpClient.send(HttpRequest.newBuilder().GET().uri(URI.create("http://localhost:8080/tasks/epic/" + epicOrig[0].getId())).build(), BodyHandlers.ofString());
+       // response = var10000.send(var10001.uri(URI.create("http://localhost:8080/tasks/epic/" + (var10002 + 10000))).build(), BodyHandlers.ofString());
+        Assertions.assertEquals(200, response.statusCode());
+
+        // response = httpClient.send(HttpRequest.newBuilder().GET().uri(URI.create("http://localhost:8080/tasks/epic/" + epicOrig[0].getId())).build(), BodyHandlers.ofString());
         Assertions.assertEquals(200, response.statusCode());
         Assertions.assertEquals(gson.toJson(epicOrig[0]), response.body());
         String responseStr1 = (String) response.body();

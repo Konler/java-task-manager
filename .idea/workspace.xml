@@ -1,28 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ab20c46e-51b1-4474-9a08-57a42804b2cf" name="Default Changelist" comment="В надежде пройти жесткий дедлайн">
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/manager/InMemoryUserManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/manager/UserManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/server/HttpTaskServer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/server/KVServer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/server/KVTaskClient.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/user/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/manager/HttpTaskServerTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/manager/KVTaskClientTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/java-kanban.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/java-kanban.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+    <list default="true" id="ab20c46e-51b1-4474-9a08-57a42804b2cf" name="Default Changelist" comment="8">
+      <change afterPath="$PROJECT_DIR$/src/manager/GsonInstantAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/manager/GsonUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/manager/HttpTaskManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/manager/FileBackedTasksManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/manager/FileBackedTasksManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/manager/InMemoryHistoryManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/manager/InMemoryHistoryManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/manager/InMemoryTaskManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/manager/InMemoryTaskManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/manager/ManagerSaveException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/manager/ManagerSaveException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/manager/Managers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/manager/Managers.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/manager/Node.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/manager/Node.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/task/Epic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/task/Epic.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/task/SubTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/task/SubTask.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/task/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/task/Task.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/manager/TaskManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/manager/TaskManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/KVTaskClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/KVTaskClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/manager/HttpTaskServerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/manager/HttpTaskServerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/manager/KVTaskClientTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/manager/KVTaskClientTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/manager/TaskManagerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/manager/TaskManagerTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -146,7 +136,7 @@
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="project.structure.last.edited" value="Global Libraries" />
+    <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
   </component>
@@ -190,6 +180,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="HttpTaskServerTest.testEpicHandlers" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="java-kanban" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="manager.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="manager" />
+      <option name="MAIN_CLASS_NAME" value="manager.HttpTaskServerTest" />
+      <option name="METHOD_NAME" value="testEpicHandlers" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="HttpTaskServerTest.testHistoryHandlers" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="java-kanban" />
       <extension name="coverage">
@@ -201,6 +207,22 @@
       <option name="PACKAGE_NAME" value="manager" />
       <option name="MAIN_CLASS_NAME" value="manager.HttpTaskServerTest" />
       <option name="METHOD_NAME" value="testHistoryHandlers" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="HttpTaskServerTest.testTaskHandlers" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="java-kanban" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="manager.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="manager" />
+      <option name="MAIN_CLASS_NAME" value="manager.HttpTaskServerTest" />
+      <option name="METHOD_NAME" value="testTaskHandlers" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -222,44 +244,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="HttpUserServerTest.getUsers" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="java-kanban" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="server.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="server" />
-      <option name="MAIN_CLASS_NAME" value="server.HttpUserServerTest" />
-      <option name="METHOD_NAME" value="getUsers" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="KVTaskClientTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="java-kanban" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="manager.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="manager" />
-      <option name="MAIN_CLASS_NAME" value="manager.KVTaskClientTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.HttpTaskServerTest" />
+        <item itemvalue="JUnit.HttpTaskServerTest.testTaskHandlers" />
+        <item itemvalue="JUnit.HttpTaskServerTest.testEpicHandlers" />
         <item itemvalue="JUnit.HttpTaskServerTest.testHistoryHandlers" />
         <item itemvalue="JUnit.HttpTaskServerTest.testTasksHandlers" />
-        <item itemvalue="JUnit.KVTaskClientTest" />
-        <item itemvalue="JUnit.HttpUserServerTest.getUsers" />
       </list>
     </recent_temporary>
   </component>
@@ -333,7 +324,9 @@
       <workItem from="1673637306446" duration="2126000" />
       <workItem from="1673707995867" duration="15908000" />
       <workItem from="1673731923236" duration="9931000" />
-      <workItem from="1673797986056" duration="7962000" />
+      <workItem from="1673797986056" duration="8189000" />
+      <workItem from="1673875613578" duration="7974000" />
+      <workItem from="1673905460044" duration="3022000" />
     </task>
     <task id="LOCAL-00001" summary="С тестами12/01">
       <created>1673553765073</created>
@@ -370,7 +363,14 @@
       <option name="project" value="LOCAL" />
       <updated>1673720955707</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="8">
+      <created>1673811088590</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1673811088590</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -459,15 +459,26 @@
     <MESSAGE value="С тестами12/01" />
     <MESSAGE value="На ревью" />
     <MESSAGE value="В надежде пройти жесткий дедлайн" />
-    <option name="LAST_COMMIT_MESSAGE" value="В надежде пройти жесткий дедлайн" />
+    <MESSAGE value="8" />
+    <option name="LAST_COMMIT_MESSAGE" value="8" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Main.java</url>
-          <line>23</line>
-          <option name="timeStamp" value="94" />
+          <url>file://$PROJECT_DIR$/src/server/KVServer.java</url>
+          <line>24</line>
+          <option name="timeStamp" value="95" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/test/manager/HttpTaskServerTest.java</url>
+          <line>172</line>
+          <option name="timeStamp" value="113" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/test/manager/HttpTaskServerTest.java</url>
+          <line>32</line>
+          <option name="timeStamp" value="114" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

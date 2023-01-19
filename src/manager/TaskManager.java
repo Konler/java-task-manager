@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public interface TaskManager {
 
@@ -54,12 +55,12 @@ public interface TaskManager {
 
     void resolveEpicNewStatus(Epic epic);
 
-    HashMap<Integer, Task> getTasks();
+    Map<Integer, Task> getTasks();
 
 
-    HashMap<Integer, SubTask> getSubTasks();
+    Map<Integer, SubTask> getSubTasks();
 
-    HashMap<Integer, Epic> getEpics();
+    Map<Integer, Epic> getEpics();
 
     List<Task> getPrioritizedTasks();
 

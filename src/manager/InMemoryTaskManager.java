@@ -10,24 +10,24 @@ import java.time.Instant;
 import java.util.*;
 
 public class InMemoryTaskManager implements TaskManager {
-    public final HashMap<Integer, Task> tasks;
-    public final HashMap<Integer, SubTask> subTasks;
-    public final HashMap<Integer, Epic> epics;
+    public  Map<Integer, Task> tasks;
+    public  Map<Integer, SubTask> subTasks;
+    public  Map<Integer, Epic> epics;
     private int idGenerator;
     public HistoryManager historyManager;
 
     @Override
-    public HashMap<Integer, Task> getTasks() {
+    public Map<Integer, Task> getTasks() {
         return tasks;
     }
 
     @Override
-    public HashMap<Integer, SubTask> getSubTasks() {
+    public Map<Integer, SubTask> getSubTasks() {
         return subTasks;
     }
 
     @Override
-    public HashMap<Integer, Epic> getEpics() {
+    public Map<Integer, Epic> getEpics() {
         return epics;
     }
 

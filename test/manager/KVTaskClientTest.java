@@ -10,6 +10,8 @@ import server.KVServer;
 import server.KVTaskClient;
 
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.time.Instant;
 
 class KVTaskClientTest {
@@ -39,8 +41,9 @@ class KVTaskClientTest {
     }
 
     @BeforeEach
-    void initBeforeEach() throws IOException, InterruptedException {
-        this.taskClient = new KVTaskClient("http://localhost:8078");
+    void initBeforeEach() throws IOException, InterruptedException, URISyntaxException {
+        URI uri =new URI("http://localhost:8078");
+        this.taskClient = new KVTaskClient(uri );
     }
 
     @Test

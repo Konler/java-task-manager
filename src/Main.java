@@ -1,6 +1,7 @@
 import manager.InMemoryTaskManager;
 import manager.ManagerSaveException;
 import manager.TaskManager;
+import server.HttpTaskServer;
 import task.Epic;
 import task.Status;
 import task.SubTask;
@@ -15,13 +16,17 @@ public class Main {
 
 public static void main(String[]args) throws IOException, ManagerSaveException {
 
-    TaskManager in = new InMemoryTaskManager();
+//    TaskManager in = new InMemoryTaskManager();
+//
+//    Task task = new Task("Task1", "Description1", Status.NEW, Instant.ofEpochMilli(4567890l), Duration.ofMinutes(5));
+//    in.createTask(task);
+//
+//    Task task1 = new Task("Task1", "Description1", Status.NEW, Instant.ofEpochMilli(4567992l), Duration.ofMinutes(5));
+//    in.createTask(task);
+//
+    HttpTaskServer taskServer = new HttpTaskServer();
+    taskServer.startServer();
 
-    Task task = new Task("Task1", "Description1", Status.NEW, Instant.ofEpochMilli(4567890l), Duration.ofMinutes(5));
-    in.createTask(task);
-
-    Task task1 = new Task("Task1", "Description1", Status.NEW, Instant.ofEpochMilli(4567992l), Duration.ofMinutes(5));
-    in.createTask(task);
 }
 }
 
