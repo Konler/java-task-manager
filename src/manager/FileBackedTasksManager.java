@@ -14,15 +14,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FileBackedTasksManager extends InMemoryTaskManager {
-    File file;
+    public File file;
 
     public FileBackedTasksManager(File file) {
         this.file = file;
-
     }
 
     void save() throws ManagerSaveException {//метод будет сохранять текущее состояние менеджера в указанный файл
-        String s = file.getName();//получить имя файла
+        String s = file.getName();
         try (FileWriter fileWriter = new FileWriter(s)) {
             if (file.length() == 0) {
                 fileWriter.write("id,type,name,status,description,epic\n");
@@ -107,15 +106,12 @@ public class FileBackedTasksManager extends InMemoryTaskManager {
             SubTask subTask = (SubTask) task;
             String epicId = subTask.getEpicId().toString();
             string.append(id).append(", ").append(type).append(", ").append(name).append(", ").append(status).append(", ").append(description).append(", ").append(startTime).append(", ").append(duration).append(", ").append(epicId).append("\n");
-
         } else if (task instanceof Epic) {
             type = "EPIC";
             string.append(id).append(", ").append(type).append(", ").append(name).append(", ").append(status).append(", ").append(description).append(", ").append(startTime).append(", ").append(duration).append("\n");
-
         } else {
             type = "TASK";
             string.append(id).append(", ").append(type).append(", ").append(name).append(", ").append(status).append(", ").append(description).append(", ").append(startTime).append(", ").append(duration).append("\n");
-
         }
         return string.toString();
     }
@@ -148,7 +144,6 @@ public class FileBackedTasksManager extends InMemoryTaskManager {
         } else if ("SUBTASK".equals(elem[1].trim())) {
             SubTask subTask = new SubTask(name, description, status, startTime, duration, epicNumber);
             subTask.setId(id);
-
             return subTask;
         } else {
             Task task = new Task(name, description, status, startTime, duration);
@@ -157,12 +152,11 @@ public class FileBackedTasksManager extends InMemoryTaskManager {
         }
     }
 
-    static String historyToString(HistoryManager manager) { // готовим строку для сохранения менеджера истории в CVS
-        // System.out.println("\n");
+    static String historyToString(HistoryManager manager) {
         List<Task> historyTask = manager.getHistory();
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i < historyTask.size(); i++) {
-            builder.append(historyTask.get(i).getId());//Последовательно добавляем Id задач
+            builder.append(historyTask.get(i).getId());
             if (i != historyTask.size() - 1) {
                 builder.append(",");
             }
@@ -171,7 +165,7 @@ public class FileBackedTasksManager extends InMemoryTaskManager {
         return str;
     }
 
-    static List<Integer> historyFromString(String value) {       //Восстановление списка id из CVS  для менеджера истории
+    static List<Integer> historyFromString(String value) {
         List<Integer> history = new ArrayList<>();
         if (history.isEmpty()) {
             return history;
@@ -183,7 +177,7 @@ public class FileBackedTasksManager extends InMemoryTaskManager {
         return history;
     }
 
-    static FileBackedTasksManager loadFromFile(File file) throws ManagerSaveException {
+    public static FileBackedTasksManager loadFromFile(File file) throws ManagerSaveException {
         List<Integer> historyArr = new ArrayList<>();
         FileBackedTasksManager fileBackedTasksManager = new FileBackedTasksManager(file);
         try (BufferedReader fileReader = new BufferedReader(new FileReader(file, StandardCharsets.UTF_8))) {

@@ -12,7 +12,6 @@ public class InMemoryHistoryManager implements HistoryManager {
     private Node<Task> head;
     private Node<Task> tail;
 
-
     @Override
     public void add(Task task) {
         if (historyHash.containsKey(task.getId())) {
@@ -53,7 +52,7 @@ public class InMemoryHistoryManager implements HistoryManager {
     }
 
 
-    List<Task> getTasks() {
+    public List<Task> getTasks() {
         List<Task> taskHistory = new ArrayList<>();
         Node newNode = head;
         while (newNode != null) {

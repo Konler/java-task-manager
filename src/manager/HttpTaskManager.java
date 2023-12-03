@@ -20,9 +20,6 @@ import java.util.Map;
 public class HttpTaskManager extends FileBackedTasksManager {
     private  Gson gson = GsonUtils.getInstance();
     private final KVTaskClient taskClient;
-
-
-
     public HttpTaskManager(URI uri) throws ManagerSaveException {
         super(null);
         try {
@@ -78,7 +75,6 @@ public class HttpTaskManager extends FileBackedTasksManager {
             taskClient.put("epics", gson.toJson(epics));
             taskClient.put("subtasks", gson.toJson(subTasks));
             taskClient.put("history", gson.toJson(historyManager.getHistory()));
-            //taskClient.put("startId", gson.toJson(id));
         } catch (IOException | InterruptedException err) {
             throw new ManagerSaveException("Ошибка при сохранении данных");
         }

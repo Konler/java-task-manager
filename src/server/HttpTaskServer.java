@@ -275,7 +275,6 @@ public class HttpTaskServer {
                 sb.append(path);
                 sb.append("</a></li>");
             }
-
             sb.append("</ul>");
             sb.append("</html>");
             OutputStream os = httpExchange.getResponseBody();
@@ -290,10 +289,8 @@ public class HttpTaskServer {
                         var7.addSuppressed(var6);
                     }
                 }
-
                 throw var7;
             }
-
             if (os != null) {
                 os.close();
             }
