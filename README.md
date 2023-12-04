@@ -1,2 +1,11 @@
-# java-kanban
-Backend for a program with a web interface that will allow you to set goals, tasks and deadlines for projects, monitor and measure activity and evaluate results.
+# Java Kanban
+
+Сервис для работы над задачами.
+
+## Типы задач
+1. Большая задача, которую можно розбить на подзадачи - эпик (epic).
+2. Подзадача (subtask).
+3. Простая задача (task)
+
+## Стек используемых технологий
+Java 11, JUnit
